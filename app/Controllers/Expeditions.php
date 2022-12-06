@@ -198,8 +198,13 @@
         public function editExpedition(){
             $ExpeditionsModel = new Expedition_model();
             helper(['form']);
+            print_r($this->request->getVar());exit;
             $rules = [
-                'expedition_id'      => 'required'
+                'expedition_id'      => 'required',
+                'expedition_overview'=> 'required',
+                'expedition_title'   => 'required',
+                'things_carry'       => 'required',
+                'map_image'          => 'required',
             ];
               
             if($this->validate($rules)){                
@@ -224,16 +229,17 @@
 
                 return redirect()->to('/expeditionsList');
             }else{
-                $rules = [];
-                $Expedition = (array) $ExpeditionsModel->getExpedition($expedition_id);           
-                if($Expedition['status'] =200){
-                     $data['result']  = $Expedition['Expedition_details']->Expeditions;
-                }
-                if($this->validate($rules)){}else{
-                    $data['Headding']="Edit Expedition";
                 $data['validation'] = $this->validator;
                 echo view('expeditionedit', $data);
-                }
+                // $Expedition = (array) $ExpeditionsModel->getExpedition($expedition_id);           
+                // if($Expedition['status'] =200){
+                //      $data['result']  = $Expedition['Expedition_details']->Expeditions;
+                // }
+                // if($this->validate($rules)){}else{
+                //     $data['Headding']="Edit Expedition";
+                // $data['validation'] = $this->validator;
+                // echo view('expeditionedit', $data);
+                // }
             }
         
         }

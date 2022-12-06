@@ -23,11 +23,11 @@
 			<div class="form-group">
         <div class="mb-3">
           <label for="" class="form-label">Trip Title</label>
-          <input type="text" class="form-control" name="expedition_title" value="<?php echo $result->expedition_title; ?>"placeholder="Title" style="width: 1239px !important;"/>
-          <input type="hidden" class="form-control" name="expedition_id" value="<?php echo $result->expedition_id; ?>"placeholder="Title" style="width: 1239px !important;" id="trip_title"/>
+          <input type="text" class="form-control" name="expedition_title" value="<?php echo $result->expedition_title; ?>"placeholder="Title" style="width: 1239px !important;" id="trip_title"/>
+          <input type="hidden" class="form-control" name="expedition_id" value="<?php echo $result->expedition_id; ?>" />
           <span class="text-danger" id="trip_title-error">
-              <?php  if ($validation->hasError('expedition_id')) {
-                    echo $validation->getError('expedition_id');
+              <?php  if ($validation->hasError('expedition_title')) {
+                    echo "Title is required";
                 } ?>
           </span>
         </div>
@@ -36,20 +36,39 @@
         <div class="mb-3">
           <label for="" class="form-label">Overview</label>
           <textarea name="expedition_overview" id="expedition_overview" class="summernote"><?php echo $result->expedition_overview; ?></textarea>
+          <span class="text-danger" id="expedition_overview-error">
+              <?php  if ($validation->hasError('expedition_overview')) {
+                    echo "Over view is required";
+                } ?>
+          </span>
         </div>
 
         <div class="mb-3">
           <label for="" class="form-label">Things to carry</label>
           <textarea name="things_carry" id="things_carry" class="summernote"><?php echo $result->things_carry; ?></textarea>
-          
+          <span class="text-danger" id="things_carry-error">
+              <?php  if ($validation->hasError('things_carry')) {
+                    echo "Things carry is required";
+                } ?>
+          </span>
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Terms & Conditions</label>
           <textarea name="terms" id="terms" class="summernote"><?php echo $result->terms; ?></textarea>
+          <span class="text-danger" id="terms-error">
+              <?php  if ($validation->hasError('terms')) {
+                    echo "Terms & Conditions is required";
+                } ?>
+          </span>
         </div>
         <div class="mb-3">
           <label for="" class="form-label">How to reach</label>
           <textarea name="map_image" id="map_image" class="summernote"><?php echo $result->map_image; ?></textarea>
+          <span class="text-danger" id="map_image-error">
+              <?php  if ($validation->hasError('map_image')) {
+                    echo "How to reach is required";
+                } ?>
+          </span>
         </div>
 
         <div class="mb-3">
@@ -124,12 +143,12 @@
 function validform(){
       var error=0;
       
-       if($('#tripOverview').summernote('isEmpty'))
+       if($('#expedition_overview').summernote('isEmpty'))
         {
-          $('#tripOverview-error').html('please enter trip Overview');
+          $('#expedition_overview-error').html('please enter Overview');
             error=1;
       }else{
-        $('#tripOverview-error').html('');
+        $('#expedition_overview-error').html('');
       }
       if($('#trip_title').val()==''){
         $('#trip_title-error').html('Please Enter Trip Title');
@@ -138,11 +157,11 @@ function validform(){
         $('#trip_title-error').html('');
       }
 
-      if($('#mapImage').summernote('isEmpty')){
-        $('#mapImage-error').html('please enter How to reach');
+      if($('#map_image').summernote('isEmpty')){
+        $('#map_image-error').html('please enter How to reach');
         error=1;
       }else{
-        $('#mapImage-error').html('');
+        $('#map_image-error').html('');
       }
       if($('#terms').summernote('isEmpty')){
         $('#terms-error').html('please enter terms and conditions');
@@ -150,19 +169,14 @@ function validform(){
       }else{
         $('#terms-error').html('');
       }
-      if($('#thingsCarry').summernote('isEmpty')){
-        $('#thingsCarry-error').html('please enter things Carry');
+      if($('#things_carry').summernote('isEmpty')){
+        $('#things_carry-error').html('please enter things Carry');
         error=1;
       }else{
-        $('#thingsCarry-error').html('');
+        $('#things_carry-error').html('');
       }
 
-      if(tripOverview==''){
-        $('#tripOverview-error').html('please enter trip Overview');
-        error=1;
-      }else{
-        $('#tripOverview-error').html('');
-      }
+      
       
 
       if(error){

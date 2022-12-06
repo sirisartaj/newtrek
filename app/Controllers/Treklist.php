@@ -270,7 +270,12 @@
             $TrekModel = new Treklist_model();
             helper(['form']);
             $rules = [
-                'trek_id'      => 'required'
+                'trek_id'      => 'required',
+                'trek_title'      => 'required',
+                'trek_overview'      => 'required',
+                'things_carry'      => 'required',
+                'terms'      => 'required',
+                'map_image'      => 'required',
             ];
           
             if($this->validate($rules)){           
@@ -292,12 +297,12 @@
                
                $a = $TrekModel->updateTrek($data);
               
-                    $treks['treks'] = $TrekModel->getTrekLists(); 
-                    return view('treklist_view',$treks);                
+                    //$treks['treks'] = $TrekModel->getTrekLists(); 
+                   // return view('treklist_view',$treks);                
               
-                // return redirect()->to('/treklist_view');
+                 return redirect()->to('/trekList');
             }else{
-                $rules = [];
+                //$rules = [];
                 $trek = (array) $TrekModel->getTrek($trek_id);           
                 if($trek['status'] =200){
                      $data['result']  = $trek['trek_details']->treks;

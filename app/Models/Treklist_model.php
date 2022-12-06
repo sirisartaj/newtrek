@@ -6,7 +6,7 @@
 	use App\Controllers\Home;
 
 	class Treklist_model extends Model{		
-
+		
 		public function getTrekLists(){
 			$home = new Home();
 	  		$url = base_url_SLim.'/treks/gettreks';

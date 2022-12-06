@@ -14,7 +14,10 @@
    .form-control input
     {
       width: 1239px;      
-    }        
+    }   
+    .text-danger{
+        color: red;
+    }     
 </style>
     
     </head>
@@ -23,34 +26,53 @@
         <div class="panel ">
             <h3>Trek </h3>
         </div>
-        <form action="<?php echo base_url().'/updateTrek'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
+        <?php //print_r($validation);?>
+        <form action="<?php echo base_url().'/updateTrek'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data" onSubmit="return validcreateform();">
             
             
 
     <div class="form-group">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">Trek Title</label>
-          <input type="text" class="form-control" name="trek_title" value="<?php echo $result->trekTitle; ?>"placeholder="Title" style="width: 1239px;"/> 
+          <input type="text" class="form-control" name="trek_title" value="<?php echo $result->trekTitle; ?>"placeholder="Title" style="width: 1239px;" id="trek_title"/> 
+          <span class="text-danger" id="trek_title-error">
+              <?php  if ($validation->hasError('trek_title')) {
+                    echo $validation->getError('trek_title');
+                } ?>
+          </span>
             <input type="hidden" name="trek_id" value="<?php echo $result->trekId; ?>"/> 
 
         </div>
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label">Overview</label>
           <textarea name="trek_overview" id="trekOverview" class="summernote"><?php echo $result->trekOverview; ?></textarea>
-        </div>
 
+        </div>
+        <span class="text-danger" id="trekOverview-error">
+            <?php  if ($validation->hasError('trek_overview')) {
+                    echo "The Overview feild is required";
+                } ?></span>
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label">Things to carry</label>
           <textarea name="things_carry" id="thingsCarry" class="summernote"><?php echo $result->thingsCarry; ?></textarea>
-          
+          <span class="text-danger" id="thingsCarry-error"><?php  if ($validation->hasError('things_carry')) {
+            echo "The Things Carry feild is required";
+                    //echo $validation->getError('things_carry');
+                } ?></span>
         </div>
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label">Terms & Conditions</label>
           <textarea name="terms" id="terms" class="summernote"><?php echo $result->terms; ?></textarea>
+          <span class="text-danger" id="terms-error"><?php  if ($validation->hasError('terms')) {
+                    echo "The Terms & Conditions feild is required";
+                } ?></span>
         </div>
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label">How to reach</label>
           <textarea name="map_image" id="mapImage" class="summernote"><?php echo $result->mapImage; ?></textarea>
+          <span class="text-danger" id="mapImage-error"><?php  if ($validation->hasError('map_image')) {
+                    echo "The How to reach feild is required";
+                } ?></span>
         </div>
 
         <div class="mb-3">
@@ -123,7 +145,46 @@
       }
     });
   }
+function validcreateform(){
+      var error=0;
+      if($('#trek_title').val()==''){
+        $('#trek_title-error').html('Please Enter Trek Title');
+        error=1;
+      }else{
+        $('#trek_title-error').html('');
+      }
 
+      if($('#mapImage').val()=='' || $('#mapImage').val()=='<p><br></p>'){
+        $('#mapImage-error').html('please enter How to reach');
+        error=1;
+      }else{
+        $('#mapImage-error').html('');
+      }
+      if($('#terms').val()==''|| $('#terms').val()=='<p><br></p>'){
+        $('#terms-error').html('please enter terms and conditions');
+        error=1;
+      }else{
+        $('#terms-error').html('');
+      }
+      if($('#thingsCarry').val()==''|| $('#thingsCarry').val()=='<p><br></p>'){
+        $('#thingsCarry-error').html('please enter things Carry');
+        error=1;
+      }else{
+        $('#thingsCarry-error').html('');
+      }
+
+      if($('#trekOverview').val()==''|| $('#trekOverview').val()=='<p><br></p>'){
+        $('#trekOverview-error').html('please enter trek Overview');
+        error=1;
+      }else{
+        $('#trekOverview-error').html('');
+      }
+      
+
+      if(error){
+        return false;
+      }
+    }
         </script>
         </body>
 </html>

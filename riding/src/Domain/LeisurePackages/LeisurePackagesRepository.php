@@ -606,8 +606,7 @@ class LeisurePackagesRepository
       $stmt = $this->connection->prepare($query);
       // echo $query;die();
       $created_date=date("Y-m-d H:i:s");
-      $im = date("YmdHis").'_'.$image_name;
-      $stmt->bindParam(':image_name', $im,PDO::PARAM_STR);
+      $stmt->bindParam(':image_name', $image_name,PDO::PARAM_STR);
       $stmt->bindParam(':lp_id', $leisure_id);
       $stmt->bindParam(':image_type', $ext);
       $stmt->bindParam(':created_date',$created_date);

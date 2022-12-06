@@ -89,6 +89,7 @@
   public function addgallerydetails($tripId){
     helper(['form', 'url']);
     if($_FILES['file']['name']!=''){
+        $_FILES['file']['name'] = date('YmdHis').'_'.$_FILES['file']['name'];
       $input = $this->validate([
           'file' => [
               'uploaded[file]',

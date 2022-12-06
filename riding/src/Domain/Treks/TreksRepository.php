@@ -947,7 +947,8 @@ class TreksRepository
       // echo $query;die();
       $stmt = $this->connection->prepare($query);
       $created_date=date("Y-m-d H:i:s");
-      $stmt->bindParam(':image_name', $created_date.'_'.$image_name,PDO::PARAM_STR);
+     
+      $stmt->bindParam(':image_name', $image_name,PDO::PARAM_STR);
       $stmt->bindParam(':trek_id', $trek_id);
       $stmt->bindParam(':image_type', $ext);
       $stmt->bindParam(':created_date',$created_date);

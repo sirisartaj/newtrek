@@ -147,6 +147,18 @@
   }
 function validcreateform(){
       var error=0;
+      var thingscarry = $('#thingsCarry').val();
+       thingscarry = $(thingscarry).text();
+
+       var mapImage = $('#mapImage').val();
+       mapImage = $(mapImage).text();
+
+       var terms = $('#terms').val();
+       terms = $(terms).text();
+
+       var trekOverview = $('#trekOverview').val();
+       trekOverview = $(trekOverview).text();
+
       if($('#trek_title').val()==''){
         $('#trek_title-error').html('Please Enter Trek Title');
         error=1;
@@ -154,26 +166,26 @@ function validcreateform(){
         $('#trek_title-error').html('');
       }
 
-      if($('#mapImage').val()=='' || $('#mapImage').val()=='<p><br></p>'){
+      if(mapImage==''){
         $('#mapImage-error').html('please enter How to reach');
         error=1;
       }else{
         $('#mapImage-error').html('');
       }
-      if($('#terms').val()==''|| $('#terms').val()=='<p><br></p>'){
+      if(terms==''){
         $('#terms-error').html('please enter terms and conditions');
         error=1;
       }else{
         $('#terms-error').html('');
       }
-      if($('#thingsCarry').val()==''|| $('#thingsCarry').val()=='<p><br></p>'){
+      if(thingscarry==''){
         $('#thingsCarry-error').html('please enter things Carry');
         error=1;
       }else{
         $('#thingsCarry-error').html('');
       }
 
-      if($('#trekOverview').val()==''|| $('#trekOverview').val()=='<p><br></p>'){
+      if(trekOverview==''){
         $('#trekOverview-error').html('please enter trek Overview');
         error=1;
       }else{

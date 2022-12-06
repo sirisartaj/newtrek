@@ -51,7 +51,7 @@ $routes->post('/updateFaq','Treklist::updateFaq');
 $routes->get('/deleteTrekFaq/(:num)/(:num)','Treklist::deleteTrekFaq/$1/$2');
 $routes->post('/deletetrekgallery','Treklist::deletetrekgallery');
 $routes->get('/trekGallery/(:num)','Treklist::trekGallery/$1');
-$routes->post('/addgallerydetails/(:num)','Treklist::addgallerydetails/$1');
+$routes->post('/addgallerydetails/(:num)','Treklist::addGallerydetails/$1');
 
 $routes->get('/trekItinerary/(:num)', 'Treklist::gettrekitinerary/$1');
 $routes->post('/trekiterinarystore', 'Treklist::trekiterinarystore');

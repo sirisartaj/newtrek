@@ -236,7 +236,8 @@ class HostelsRepository
       $query ="INSERT INTO sg_hostel_gallery(image_name,hostel_id, status,created_date, created_by)VALUES(:image_name,:hostel_id,:status,:created_date, :created_by)";
       $stmt = $this->connection->prepare($query);
       $created_date = date("Y-m-d H:i:s");
-      $stmt->bindParam(':image_name', $created_date.'_'.$hostelImage,PDO::PARAM_STR);
+      $im = date("YmdHis").'_'.$image_name;
+      $stmt->bindParam(':image_name', $im,PDO::PARAM_STR);
       $stmt->bindParam(':hostel_id', $hostelId);
       $stmt->bindParam(':status' , $status);
       $stmt->bindParam(':created_date',$created_date);

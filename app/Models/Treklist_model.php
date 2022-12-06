@@ -6,7 +6,7 @@
 	use App\Controllers\Home;
 
 	class Treklist_model extends Model{		
-		
+
 		public function getTrekLists(){
 			$home = new Home();
 	  		$url = base_url_SLim.'/treks/gettreks';
@@ -71,6 +71,7 @@
 			$url = base_url_SLim.'/treks/addtrekgallery';
 			$data['status'] = 0;
 			$data['createdBy'] = '1';
+
 			return $home->CallAPI('POST',$url,$data);
 		}
 		public function deletetrekgallery($data){

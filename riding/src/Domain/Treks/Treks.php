@@ -162,32 +162,7 @@ final class Treks
   }
   public function addTrekGallery($data) {
     extract($data);
-    if(isset($trekgalImage['name'])&&!empty($trekgalImage['name'])){
-      $filedir = UPLOADPATH."treks/gallery/"; 
-      $randName = rand(10101010, 9090909090);
-      $newName = "trek_". $randName;
-      $ext = substr($trekgalImage['name'], strrpos($trekgalImage['name'], '.') + 1);
-      if(($ext == 'jpg')||($ext=='jpeg')||($ext=='png')||($ext=='gif')){
-        list($width, $height) = getimagesize($trekgalImage['tmp_name']); 
-        $ImageUpload = new ImageUpload;
-        $ImageUpload->File = $trekgalImage;
-        $ImageUpload->method = 1;
-        $ImageUpload->SavePath = $filedir;
-        $ImageUpload->NewWidth = $width;
-        $ImageUpload->NewHeight = $height;
-        $ImageUpload->NewName = $newName;
-        $ImageUpload->OverWrite = true;
-        $err = $ImageUpload->UploadFile();
-        $trekgalImage = $newName.".".strtolower($ext);
-      }else{
-        $status = array(
-            'status' => "400",
-            'message' => "Failure Please upload jpg,png,gift,jpeg images only"
-        );
-        return $status;
-      }
-    }
-    $data['trekgalImage'] = $trekgalImage;
+    
     $trek = $this->repository->addTrekGallery($data);
     return $trek;
   }

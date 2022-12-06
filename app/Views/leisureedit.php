@@ -14,19 +14,27 @@
     
 	</head>
 	<body>
-		<form action="<?php echo base_url().'/editLeisure'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
+		<form action="<?php echo base_url().'/editLeisure'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data" onSubmit="validcreateform();">
 			<div class="form-group">
         <div class="mb-3">
           <label for="" class="form-label">Trip Title</label>
           <input type="text" class="form-control inputwidth" name="pkg_name" value="<?php echo $result->pkgName; ?>"placeholder="Title" style="width: 1239px;"/> 
           <input type="hidden" class="form-control" name="leisure_id" value="<?php echo $leisure_id; ?>"placeholder="Title" style="width: 1239px;"/> 
              
-
+          <span class="text-danger" id="pkg_name-error">
+              <?php  if ($validation->hasError('pkg_name')) {
+                    echo $validation->getError('pkg_name');
+                } ?>
+          </span>
         </div>
         
         <div class="mb-3">
           <label for="" class="form-label">Overview</label>
           <textarea name="pkg_overview" id="pkg_overview" class="summernote"><?php echo $result->pkgOverview; ?></textarea>
+          <span class="text-danger" id="pkg_overview-error">
+            <?php  if ($validation->hasError('pkg_overview')) {
+                    echo "The Overview feild is required";
+                } ?></span>
         </div>
 
         <div class="mb-3">
@@ -109,7 +117,59 @@
       }
     });
   }
-//});
+
+  function validcreateform(){
+      var error=0;
+      var thingscarry = $('#thingsCarry').val();
+       thingscarry = $(thingscarry).text();
+
+       var mapImage = $('#mapImage').val();
+       mapImage = $(mapImage).text();
+
+       var terms = $('#terms').val();
+       terms = $(terms).text();
+
+       var trekOverview = $('#trekOverview').val();
+       trekOverview = $(trekOverview).text();
+
+      if($('#pkg_name').val()==''){
+        $('#pkg_name-error').html('Please Enter Package Name');
+        error=1;
+      }else{
+        $('#trek_title-error').html('');
+      }
+
+      if(mapImage==''){
+        $('#mapImage-error').html('please enter How to reach');
+        error=1;
+      }else{
+        $('#mapImage-error').html('');
+      }
+      if(terms==''){
+        $('#terms-error').html('please enter terms and conditions');
+        error=1;
+      }else{
+        $('#terms-error').html('');
+      }
+      if(thingscarry==''){
+        $('#thingsCarry-error').html('please enter things Carry');
+        error=1;
+      }else{
+        $('#thingsCarry-error').html('');
+      }
+
+      if(trekOverview==''){
+        $('#trekOverview-error').html('please enter trek Overview');
+        error=1;
+      }else{
+        $('#trekOverview-error').html('');
+      }
+      
+
+      if(error){
+        return false;
+      }
+    }
 		</script>
 		</body>
 </html>

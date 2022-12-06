@@ -27,7 +27,7 @@
             <h3>Trek </h3>
         </div>
         <?php //print_r($validation);?>
-        <form action="<?php echo base_url().'/updateTrek'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data" onSubmit="return validcreateform();">
+        <form action="<?php echo base_url().'/updateTrek'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data" onSubmit="return validform();">
             
             
 
@@ -145,20 +145,9 @@
       }
     });
   }
-function validcreateform(){
+function validform(){
       var error=0;
-      var thingscarry = $('#thingsCarry').val();
-       thingscarry = $(thingscarry).text();
-
-       var mapImage = $('#mapImage').val();
-       mapImage = $(mapImage).text();
-
-       var terms = $('#terms').val();
-       terms = $(terms).text();
-
-       var trekOverview = $('#trekOverview').val();
-       trekOverview = $(trekOverview).text();
-
+      
       if($('#trek_title').val()==''){
         $('#trek_title-error').html('Please Enter Trek Title');
         error=1;
@@ -166,32 +155,31 @@ function validcreateform(){
         $('#trek_title-error').html('');
       }
 
-      if(mapImage==''){
+      if($('#mapImage').summernote('isEmpty')){
         $('#mapImage-error').html('please enter How to reach');
         error=1;
       }else{
         $('#mapImage-error').html('');
       }
-      if(terms==''){
+      if($('#terms').summernote('isEmpty')){
         $('#terms-error').html('please enter terms and conditions');
         error=1;
       }else{
         $('#terms-error').html('');
       }
-      if(thingscarry==''){
+      if($('#thingsCarry').summernote('isEmpty')){
         $('#thingsCarry-error').html('please enter things Carry');
         error=1;
       }else{
         $('#thingsCarry-error').html('');
       }
 
-      if(trekOverview==''){
+      if($('#trekOverview').summernote('isEmpty')){
         $('#trekOverview-error').html('please enter trek Overview');
         error=1;
       }else{
         $('#trekOverview-error').html('');
-      }
-      
+      }      
 
       if(error){
         return false;

@@ -19,12 +19,17 @@
     
 	</head>
 	<body><div class="container" style="margin:0;">
-		<form action="<?php echo base_url().'/editexpedition'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
+		<form action="<?php echo base_url().'/editexpedition'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data" onSubmit="return validform();">
 			<div class="form-group">
         <div class="mb-3">
           <label for="" class="form-label">Trip Title</label>
           <input type="text" class="form-control" name="expedition_title" value="<?php echo $result->expedition_title; ?>"placeholder="Title" style="width: 1239px !important;"/>
-          <input type="hidden" class="form-control" name="expedition_id" value="<?php echo $result->expedition_id; ?>"placeholder="Title" style="width: 1239px !important;"/>
+          <input type="hidden" class="form-control" name="expedition_id" value="<?php echo $result->expedition_id; ?>"placeholder="Title" style="width: 1239px !important;" id="trip_title"/>
+          <span class="text-danger" id="trip_title-error">
+              <?php  if ($validation->hasError('expedition_id')) {
+                    echo $validation->getError('expedition_id');
+                } ?>
+          </span>
         </div>
         
 
@@ -56,7 +61,7 @@
 		</form>
 		</div>
 	<script> 
-//$(document).ready(function() {
+
   
   $('#expedition_overview').summernote({
     height: 200,
@@ -116,7 +121,54 @@
       }
     });
   }
-//});
+function validform(){
+      var error=0;
+      
+       if($('#tripOverview').summernote('isEmpty'))
+        {
+          $('#tripOverview-error').html('please enter trip Overview');
+            error=1;
+      }else{
+        $('#tripOverview-error').html('');
+      }
+      if($('#trip_title').val()==''){
+        $('#trip_title-error').html('Please Enter Trip Title');
+        error=1;
+      }else{
+        $('#trip_title-error').html('');
+      }
+
+      if($('#mapImage').summernote('isEmpty')){
+        $('#mapImage-error').html('please enter How to reach');
+        error=1;
+      }else{
+        $('#mapImage-error').html('');
+      }
+      if($('#terms').summernote('isEmpty')){
+        $('#terms-error').html('please enter terms and conditions');
+        error=1;
+      }else{
+        $('#terms-error').html('');
+      }
+      if($('#thingsCarry').summernote('isEmpty')){
+        $('#thingsCarry-error').html('please enter things Carry');
+        error=1;
+      }else{
+        $('#thingsCarry-error').html('');
+      }
+
+      if(tripOverview==''){
+        $('#tripOverview-error').html('please enter trip Overview');
+        error=1;
+      }else{
+        $('#tripOverview-error').html('');
+      }
+      
+
+      if(error){
+        return false;
+      }
+    }
 		</script>
 		</body>
 </html>

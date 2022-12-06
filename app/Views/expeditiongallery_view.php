@@ -9,16 +9,30 @@
 	</head>
 	<body>
 		<style type="text/css">
-			.delete{
-					width: 12px;
-			    position: relative;
-			    top: 0;
-			    display: block;
-			    background: #bd1d1d;
-			    padding: 5px;
-			    border-radius: 7px;
-			    color: #fff;
-			}
+			.gallery-tools {
+  width: 766px;
+  /*border-radius: 25px;*/
+  border: 2px solid #ccc;
+  padding: 15px 15px 15px 15px;
+  margin: 20px 20px 20px 20px;
+  background: #A4D3EE;
+  overflow: visible;
+  box-shadow: 5px 5px 2px #888888;
+  position: relative;
+}
+
+.delete {
+    position: absolute;
+    background: red;
+    color: white;
+    top: -10px;
+    right: -10px;
+    padding: 5px;
+    border-radius: 7px;
+}
+.gallery{
+	list-style: none;
+}
 			
 		</style>
 		<div class="container">
@@ -43,13 +57,14 @@
                 <ul class="gallery" id="gallery">
 	                <?php foreach ($galleryImages->gallery_image as $images) { ?>
 	                  <li class="sortable" id="photoid_<?php echo $images->imageId;?>">
-	                    <a href="#" class="animal effect-zoe magnific" data-mfp-src="<?php echo $images->imageName;?>">
-	                    <img width="766" src="<?php echo $images->imageName;?>" alt="no image" />
-	                    </a>
+	                    
 	                    <?php $onlyname = end(explode('/', $images->imageName));?>
 	                    <div class="gallery-tools"  >
 	                      <div id="<?php echo $images->imageId;?>" title="Delete<?php echo $images->imageName;?>" url=""  class="delete btn btn-danger" onclick="deletegallery('<?php echo $images->imageId;?>','<?php echo $onlyname;?>');"><i class="icon-trash"></i>X
 	                      </div>
+	                      <a href="#" class="animal effect-zoe magnific" data-mfp-src="<?php echo $images->imageName;?>">
+	                    <img width="766" src="<?php echo $images->imageName;?>" alt="no image" />
+	                    </a>
 	                    </div>
 	                    
 	                  </li>

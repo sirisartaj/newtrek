@@ -34,17 +34,6 @@
 .gallery{
 	list-style: none;
 }
-			/*.delete{
-					    width: 757px;
-					    text-align: center;
-					    position: relative;
-					    top: 27px;
-					    background: #bd1d1d;
-					    padding: 5px;
-					    border-radius: 7px;
-					    color: #fff;
-					    opacity: 0.4;
-			}*/
 			
 		</style>
 		<div class="container">
@@ -70,16 +59,6 @@
 	                <?php foreach ($galleryImages->gallery_image as $images) { ?>
 	                  <li class="sortable" id="photoid_<?php echo $images->image_id;?>">
 	                  	 <?php $onlyname = end(explode('/', $images->imageName));?>
-
-	                  	 <!-- <div class="d-flex justify-content-between">
-								       <div>
-								            
-								        </div>
-								        <div>
-								            <div id="<?php echo $images->image_id;?>" title="Delete<?php echo $images->imageName;?>" url=""  class="delete btn btn-danger col-1" onclick="deletegallery('<?php echo $images->image_id;?>','<?php echo $onlyname;?>');"><i class="icon-trash"></i>X
-									                      </div>
-								        </div>
-								    </div> -->
 
 								    <div class="gallery-tools">
 

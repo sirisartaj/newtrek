@@ -9,16 +9,30 @@
 	</head>
 	<body>
 		<style type="text/css">
-			.delete{
-					width: 12px;
-			    position: relative;
-			    top: 0;
-			    display: block;
-			    background: #bd1d1d;
-			    padding: 5px;
-			    border-radius: 7px;
-			    color: #fff;
-			}
+			.gallery-tools {
+  width: 766px;
+  /*border-radius: 25px;*/
+  border: 2px solid #ccc;
+  padding: 15px 15px 15px 15px;
+  margin: 20px 20px 20px 20px;
+  background: #A4D3EE;
+  overflow: visible;
+  box-shadow: 5px 5px 2px #888888;
+  position: relative;
+}
+
+.delete {
+    position: absolute;
+    background: red;
+    color: white;
+    top: -10px;
+    right: -10px;
+    padding: 5px;
+    border-radius: 7px;
+}
+.gallery{
+	list-style: none;
+}
 			
 		</style>
 		<div class="container">
@@ -43,14 +57,15 @@
                 <div class="gallery" id="gallery" style="list-style: none;">
 	                <?php foreach ($galleryImages->gallery_image as $images) { ?>
 	                  <div class="sortable" id="photoid_<?php echo $images->imageId;?>">
-	                    <a href="#" class="animal effect-zoe magnific" data-mfp-src="<?php echo $images->imageName;?>">
-	                    <img width="766"  src="<?php echo $images->imageName;?>" alt="no image" />
-	                    </a>
+	                    
 
 	                    <div class="gallery-tools"  >
 	                    	<?php $onlyname = end(explode('/', $images->imageName));?>
 	                      <div id="<?php echo $images->imageId;?>" title="Delete<?php echo $onlyname;?>" url=""  class="delete btn btn-danger" onClick="deletegallery('<?php echo $images->imageId;?>','<?php echo $onlyname;?>');"><i class="icon-trash"></i>X
 	                      </div>
+	                      <a href="#" class="animal effect-zoe magnific" data-mfp-src="<?php echo $images->imageName;?>">
+	                    <img width="766"  src="<?php echo $images->imageName;?>" alt="no image" />
+	                    </a>
 	                    </div>
 	                  </div>
 	                  <?php } ?>   
@@ -59,7 +74,7 @@
           </div>
         </div>
 		</div>
-		<script type="text/javascript" src="<?php echo baseURL1;?>/js/dropzone.min.js"></script>
+		
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 		<script> 
 			
@@ -110,6 +125,6 @@
 		    $('#')
 		</script>
 		
-
+<script type="text/javascript" src="<?php echo baseURL1;?>/js/dropzone.min.js"></script>
 	</body>
 </html>

@@ -77,7 +77,7 @@
             $model->deleteHostelFaq($data);
            return $this->response->redirect(base_url('/hostelsFaq/'.$hostel_id)); 
         }
-        public function deletehostelgallery($faq_id,$hostel_id){
+        public function deletehostelgallery(){
             
             $model = new Hostels_model();
             $id = $this->request->getVar('id');
@@ -135,8 +135,8 @@
                 }
             }
             if($result){
-                $data['galleryImages'] = $model->getGalleryimages($trek_id); 
-                return $this->response->redirect(base_url('/trekGallery/'.$data['trek_id'])); 
+                $data['galleryImages'] = $model->getGalleryimages($hostel_id); 
+                return $this->response->redirect(base_url('/hostelGallery/'.$hostel_id)); 
                 // $this->session->sets("success_msg","images added successfully");
             }
         }

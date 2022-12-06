@@ -55,7 +55,7 @@
 
 		public function getGalleryimages($hostel_id){
 			$home = new Home();
-			echo $url = base_url_SLim.'/hostels/getgallery/'.$hostel_id;
+			$url = base_url_SLim.'/hostels/getgallery/'.$hostel_id;
 			return $home->CallAPI('GET',$url);
 		}
 		
@@ -70,6 +70,7 @@
 		public function deletegallery($data){           
 	        $home = new Home();   
 	       $url = base_url_SLim.'/hostels/deletegallery';
+
 	       return $home->CallAPI('POST',$url,$data);          
 	    }
 

@@ -179,4 +179,8 @@ final class Hostels
     $res = $this->repository->addGallery($data);
     return $res; 
   }
+  public function DeleteGallery($data) {
+    $res = $this->repository->DeleteGallery($data);
+    return $res; 
+  }
 }

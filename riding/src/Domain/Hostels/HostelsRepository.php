@@ -198,10 +198,42 @@ class HostelsRepository
       return $status;
     }
   }
+  public function DeleteGallery($data){
+    try {
+      //print_r($data);exit;
+      extract($data);
+      $query ="UPDATE sg_hostel_gallery SET status=9,modified_date=:modified_date,modified_by=:modified_by where hostelgallery_id =:hostelgallery_id";
+      $stmt = $this->connection->prepare($query);
+     
+      $stmt->bindParam(':hostelgallery_id', $image_id );
+      $stmt->bindParam(':modified_date',$modified_date,PDO::PARAM_STR);
+      $stmt->bindParam(':modified_by',$modified_by,PDO::PARAM_STR);
+      $res=$stmt->execute();
+      
+      if($res){
+        unlink(UPLOADPATH.'/hostels/'.$image_name);
+          $status = array(
+          'status' => "200",
+          'message' => "Hostel Details Added Successfully");
+       }
+       else{
+        $status = array(
+          'status' => "304",
+          'message' => "Hostel Details Not Added Successfully");
+       }
+       return $status;
+    } catch(PDOException $e) {
+      $status = array(
+              'status' => "500",
+              'message' => $e->getMessage()
+          );
+      return $status;
+    }
+  }
   public function addHostelGallery($data) {
     try {
       extract($data);
-      $query ="INSERT INTO sg_hostelgallery(image_name,hostel_id, status,created_date, created_by)VALUES(:image_name,:hostel_id,:status,:created_date, :created_by)";
+      $query ="INSERT INTO sg_hostel_gallery(image_name,hostel_id, status,created_date, created_by)VALUES(:image_name,:hostel_id,:status,:created_date, :created_by)";
       $stmt = $this->connection->prepare($query);
       $created_date = date("Y-m-d H:i:s");
       $stmt->bindParam(':image_name', $hostelImage);

@@ -970,7 +970,7 @@ class ExpeditionsRepository
       $query = "INSERT INTO sg_expedition_gallery SET `image_name` = :image_name, expedition_id=:expedition_id,image_type=:image_type,created_date=:created_date,created_by=:created_by,recordstatus=:status";
       $stmt = $this->connection->prepare($query);
       $created_date=date("Y-m-d H:i:s");
-      $stmt->bindParam(':image_name', $image_name);
+      $stmt->bindParam(':image_name', $created_date.'_'.$image_name,PDO::PARAM_STR);
       $stmt->bindParam(':expedition_id', $expedition_id);
       $stmt->bindParam(':image_type', $ext);
       $stmt->bindParam(':created_date',$created_date);

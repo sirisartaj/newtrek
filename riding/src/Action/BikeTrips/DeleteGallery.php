@@ -18,7 +18,9 @@ final class DeleteGallery
       ResponseInterface $response, $args
   ): ResponseInterface 
   {
-    $bikeTrips = $this->bikeTrips->deleteGallery($args);
+    $data = $request->getBody();
+    $data =(array) json_decode($data);
+    $bikeTrips = $this->bikeTrips->deleteGallery($data);
     $response->getBody()->write((string)json_encode($bikeTrips));
     return $response
           ->withHeader('Content-Type', 'application/json');

@@ -2,10 +2,10 @@
 <html>
 	<head> 
 		<title>Gallery</title>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/css/dropzone.css">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/css/dropzone.min.css">
-		<script type="text/javascript" src="<?php echo base_url();?>/js/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" src="<?php echo base_url();?>/js/jquery-ui-1.11.2.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo baseURL1;?>/css/dropzone.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo baseURL1;?>/css/dropzone.min.css">
+		<script type="text/javascript" src="<?php echo baseURL1;?>/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="<?php echo baseURL1;?>/js/jquery-ui-1.11.2.min.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -31,11 +31,12 @@
 	                <?php foreach ($galleryImages->gallery_image as $images) { ?>
 	                  <li class="sortable" id="photoid_<?php echo $images->tripImageId;?>">
 	                    <a href="#" class="animal effect-zoe magnific" data-mfp-src="<?php echo $images->imageName;?>">
-	                    <img width="180" height="130" src="<?php echo $images->imageName;?>" alt="no image" />
+	                    <img width="766"  src="<?php echo $images->imageName;?>" alt="no image" />
 	                    </a>
-	                    <div class="gallery-tools">
-	                      <a href="#" id="<?php echo $images->tripImageId;?>" title="Delete<?php echo $images->imageName;?>" url=""  class="delete"><i class="icon-trash"></i>
-	                      </a>
+	                    <?php $onlyname = end(explode('/', $images->imageName));?>
+	                    <div class="gallery-tools"  >
+	                      <div id="<?php echo $images->tripImageId;?>" title="Delete<?php echo $images->imageName;?>" url=""  class="delete btn btn-danger" onclick="deletegallery('<?php echo $images->tripImageId;?>','<?php echo $onlyname;?>');"><i class="icon-trash"></i>X
+	                      </div>
 	                    </div>
 	                  </li>
 	                  <?php } ?>   
@@ -44,17 +45,44 @@
           </div>
         </div>
 		</div>
+		<script type="text/javascript" src="<?php echo baseURL1;?>/js/dropzone.min.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 		<script> 
-			$(document).ready(function(){
+			
 				 $("#assignment-dropzone").dropzone({  
       "maxFilesize": 20
     });
 				Dropzone.autoDiscover = false;
-			  $(".dropzone").hide();
-			  $("#upload-dropzone").click(function(){
-			    $(".dropzone").slideToggle('slow');
-			  });
-			});
+			  //$(".dropzone").hide();
+			  
+		    $(".dropzone").slideToggle('slow');
+			  
+			function deletegallery(id,name){
+		console.log(id);
+				Swal.fire({
+				  title: 'Are you sure?',
+				  text: "You won't be able to revert this!",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+				  	$.ajax({				      
+				      method: "POST",
+				      url: '<?php echo base_url()."/deletebikegallery";?>',
+				      data: {'id':id,'image_name':name},
+				      success: function(result1) {
+				      	console.log(result1);
+				      	location.reload();
+				      	 
+				      }
+				    });
+				    
+				  }
+				})
+			}
 		</script>
 
 		<script> 
@@ -68,7 +96,7 @@
 		        window.location.reload();			   
 			});
 		</script>
-		<script type="text/javascript" src="<?php echo base_url();?>/js/dropzone.min.js"></script>
+		
 
 	</body>
 </html>

@@ -14,58 +14,73 @@
 	    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-			.form_bg{
-				border: 1px solid grey;
-			    border-radius: 25px;
-			    padding: 10px;
-			    margin-top: 25px;
-			    background-color: #f0f0f0;
+			.inputwidth{
+				width: 1239px;
 			}
 		</style>
 
 	</head>
 	<body>
-		<div class="container">
-			<div class="offset-md-3 col-md-6">				
-				<form class="row form_bg" action="<?php echo base_url('/updateBikeFaq')?>" method="POST" name="editFaqForm" id="editFaqForm">
-		            <div class="col-md-12 form-group">
-		                <label for="faq_category">Category :</label>
+		<div class="container" style="margin:0">
+			<div class="">				
+				<form class="" action="<?php echo base_url('/updateBikeFaq')?>" method="POST" name="editFaqForm" id="editFaqForm">
+		            <div class="form-group">
+		            <div class="mb-3">
+		                <label for="faq_category" class="form-label">Category</label>
 		                <select class="form-control" id="faq_category" name="category_id" required>
 		                	<?php foreach($categories -> faq_categories as $category) :?>
 		                	<option <?php if($category->faqCatId == $faq->cat_id) echo "selected";?> value="<?php echo $category->faqCatId;?>" ><?php echo $category->categoryTitle;?></option>
 						 <?php endforeach;?>
 		                </select> 
 		            </div>
-		            <div class="col-md-12 form-group">
-		                <label for="question">Question:</label>
+		            <div class="mb-3">
+		                <label for="question" class="form-label">Question</label>
 		                <input type="text" class="form-control" id="question" name="question" value="<?php echo $faq->question;?>">
 		            </div>
-		            <div class="col-md-12 form-group">
-		                <label for="faq_answer">Answer:</label>
+		            <div class="mb-3">
+		                <label for="faq_answer" class="form-label">Answer</label>
 						<!-- <textarea   id="faq_answer" name="answer" ></textarea> -->
 						<textarea id="faq_answer" name="answer" value="<?php echo $faq->answer;?>"></textarea>
 		            </div>
 		            <input type="hidden" name="faq_id" value="<?php echo $faq->faq_id;?>">
 		            <input type="hidden" name="tripId" value="<?php echo $faq->trip_id;?>">
-		            <div class="col-md-12 text-center">
-						<button type="submit" class="btn btn-success" name="submit">Save</button>
-						<button type="button" class="btn btn-danger" name="cancel" onclick="javascript:history.go(-1);">Cancel</button>
+		            <div class="mb-3">
+						<input type="submit" class="" name="submit" value="Update" />
+						<input type="button" class="" name="cancel" onclick="javascript:history.go(-1);" value="Cancel" />
+					</div>			
 					</div>		
 				</form>
 			</div>
 		</div>
 		<script>		
-			$(document).ready(function() {
-				$('#faq_answer').summernote({
-					// placeholder: 'Enter Your Answer Here...',
-					tabsize: 2,
-	            	height: 200
-				});
-				var ans = "<?php echo $faq->answer;?>";
-				console.log(ans);
-				$('#faq_answer').summernote('code', ans);
-			});		
+			$('textarea').summernote({
+			    height: 200,width: 1239,
+			    callbacks: {
+			        onImageUpload: function(files, editor, welEditable) {
+			            sendFile(files[0], editor, welEditable,this.id);
+			        }
+			    }
+			});	
+			function sendFile(file, editor, welEditable,summernotid) {
+			  	
+			    data = new FormData();
+			    data.append("file", file);
+			    data.append("foldername",summernotid);
+			    $.ajax({
+			      data: data,
+			      type: "POST",
+			      url: "<?php echo base_url().'/fileupload';?>",
+			      cache: false,
+			      contentType: false,
+			      processData: false,
+			      success: function(url) {
+			      	console.log(url);
+			      	var image = $('<img>').attr('src',url);
+			            $('#'+summernotid).summernote("insertNode", image[0]);
+			      	 
+			      }
+			    });
+		    }	
 		</script>
 	</body>
 </html>

@@ -47,36 +47,19 @@ class BikeTripsRepository
    public function insertTrip($data) {
     try {
       extract($data);
-      $sql = "INSERT INTO sg_biketrips(trip_title,trip_days,trip_nights,trip_fee,trip_image,trip_pagebanner,difficulty,region,tripvideo_url,tripvideo_title,season,      spoc_name, spoc_mobile,spoc_email,spoc_designation,trip_overview,things_carry,      faq,terms_conditions,how_to_reach,altitude,visit_time,temparature,popular_trips,status,created_date,created_by)values(:trip_title,:trip_days,:trip_nights,:trip_fee,:trip_image, :trip_pagebanner,:difficulty,:region,:tripvideo_url,       :tripvideo_title,:season,:spoc_name,:spoc_mobile,:spoc_emailid,        :spoc_designation,:overview,:things_carry,:faq,:terms_conditions,       :how_to_reach,:altitude,:visit_time,:temparature,:popular_trips,:status,:created_date,:created_by)";
+      $sql = "INSERT INTO sg_biketrips(trip_title,trip_days,trip_fee,trip_overview,things_carry,terms_conditions,how_to_reach,status,created_date,created_by)values(:trip_title,:trip_days,:trip_fee,:overview,:things_carry,:terms_conditions,:how_to_reach,:status,:created_date,:created_by)";
       $stmt = $this->connection->prepare($sql); 
       $created_date = date("Y-m-d H:i:s");
-      $stmt->bindParam(':trip_title', $tripTitle);
-      $stmt->bindParam(':trip_days', $tripDays);
-      $stmt->bindParam(':trip_nights', $tripNights);
-      $stmt->bindParam(':trip_fee', $tripFee);
-      $stmt->bindParam(':trip_image',$biketripImage);
-      $stmt->bindParam(':trip_pagebanner',$tripPagebanner);
-      $stmt->bindParam(':difficulty', $difficulty);
-      $stmt->bindParam(':region', $region);
-      $stmt->bindParam(':tripvideo_url', $tripvideoUrl);
-      $stmt->bindParam(':tripvideo_title', $tripvideoTitle);
-      $stmt->bindParam(':season', $season);
-      $stmt->bindParam(':spoc_name', $spocName);
-      $stmt->bindParam(':spoc_mobile', $spocMobile);
-      $stmt->bindParam(':spoc_emailid', $spocEmailid);
-      $stmt->bindParam(':spoc_designation',$spocDesignation);
-      $stmt->bindParam(':overview', $overview);
-      $stmt->bindParam(':things_carry', $thingsCarry);
-      $stmt->bindParam(':faq',$faq);
-      $stmt->bindParam(':terms_conditions', $termsConditions);
-      $stmt->bindParam(':how_to_reach', $howToReach);
-      $stmt->bindParam(':altitude', $altitude);
-      $stmt->bindParam(':visit_time', $visitTime);
-      $stmt->bindParam(':temparature', $temparature);
-      $stmt->bindParam(':popular_trips', $popularTrips);
+      $stmt->bindParam(':trip_title', $trip_title);
+      $stmt->bindParam(':trip_days', $trip_days);
+      $stmt->bindParam(':trip_fee', $trip_fee);
+      $stmt->bindParam(':overview', $trip_overview);
+      $stmt->bindParam(':things_carry', $things_carry);
+      $stmt->bindParam(':terms_conditions', $terms);
+      $stmt->bindParam(':how_to_reach', $map_image);      
       $stmt->bindParam(':status', $status);
-      $stmt->bindParam(':created_date' ,$createdDate);
-      $stmt->bindParam(':created_by' , $createdBy);
+      $stmt->bindParam(':created_date' ,$created_date);
+      $stmt->bindParam(':created_by' , $created_by);
       $stmt->execute();
       $trip_id= $this->connection->lastInsertId();
       return $trip_id;     
@@ -483,11 +466,14 @@ class BikeTripsRepository
   public function deleteGallery($data) {
     try{
       extract($data);
-      $query = "UPDATE sg_trip_gallery SET status='9' where tripimage_id=:tripimage_id";
+      $query = "UPDATE sg_trip_gallery SET status='9',modified_date=:modified_date,modified_by=:modified_by where tripimage_id=:tripimage_id";
       $stmt = $this->connection->prepare($query);
       $stmt->bindParam(':tripimage_id',$image_id);
+      $stmt->bindParam(':modified_date',$modified_date);
+      $stmt->bindParam(':modified_by',$modified_by);
       $res = $stmt->execute();
       if($res == 'true'){ 
+        unlink(UPLOADPATH.'/biketripsgallery/'.$image_name);
         $status = array(
           'status' => ERR_OK,
           'message' => "Image Deleted Successfully");

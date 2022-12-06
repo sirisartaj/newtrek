@@ -11,10 +11,14 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-    
+    <style type="text/css">
+    	.inputwidth{
+    		width: 1239px;;
+    	}
+    </style>
 	</head> 
 	<body>
-		<div class="container">
+		<div class="container" style="margin:0">
 			<form action="<?php echo base_url().'/leisureiterinarystore'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
 				<input type="hidden" class="form-control" id="leisure_id" name="leisure_id" placeholder="" value="<?php echo $leisure_id;?>">
 				<?php 
@@ -23,19 +27,19 @@
 				foreach($result as $t){ ?>
 					<div class="form-group ">
 						<div class="btn btn-sm btn-danger">day <?php echo $i++; ?></div>
-						<div class="text-right" onclick="deletea('<?php echo $t->lpitinerary_id;?>');">delete</div>
+						<div class="btn btn-sm btn-danger text-right" onclick="deletea('<?php echo $t->lpitinerary_id;?>');">delete</div>
 					</div>
 					<div class="form-group">
 						<div class="mb-3">
 					  <label for="exampleFormControlInput1" class="form-label">Title</label>
 					  <input type="hidden" class="form-control" id="lpitinerary_id" name="lpitinerary_id[]" placeholder="" value="<?php echo $t->lpitinerary_id;?>">
 
-					  <input type="text" class="form-control" id="title" name="title[]" placeholder="iterinary title" value="<?php echo $t->title;?>">
+					  <input type="text" class="form-control inputwidth" id="title" name="title[]" placeholder="iterinary title" value="<?php echo $t->title;?>">
 
 					</div>
 					<div class="mb-3">
-					  <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-					  <textarea class="form-control" id="exampleFormControlTextarea1" name="description[]" rows="3"><?php echo $t->description;?></textarea>
+					  <label for="" class="form-label">Description</label>
+					  <textarea class="form-control" id="textare_<?php echo $t->lpitinerary_id;?>" name="description[]" rows="3"><?php echo $t->description;?></textarea>
 					</div>
 					</div>
 
@@ -89,44 +93,29 @@
 			}
 		function addday(){
 			 day = parseInt($('#day').html())+1;
-			var str = '<div class="form-group "><div class="btn btn-sm btn-danger">day '+day+'</div></div><div class="form-group"><div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Title</label><input type="hidden" class="form-control" id="lpitinerary_id" name="lpitinerary_id[]" placeholder="" value=""><input type="text" class="form-control" id="title" name="title[]" placeholder="iterinary title" value=""></div><div class="mb-3"><label for="exampleFormControlTextarea1" class="form-label">Description</label><textarea class="form-control" id="exampleFormControlTextarea1" name="description[]" rows="3"></textarea></div></div>';
+			var str = '<div class="form-group "><div class="btn btn-sm btn-danger">day '+day+'</div></div><div class="form-group"><div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Title</label><input type="hidden" class="form-control" id="lpitinerary_id" name="lpitinerary_id[]" placeholder="" value=""><input type="text" class="form-control inputwidth" id="title" name="title[]" placeholder="iterinary title" value=""></div><div class="mb-3"><label for="textarea_'+day+'" class="form-label">Description</label><textarea class="form-control" id="textarea_'+day+'" name="description[]" rows="3"></textarea></div></div>';
 			$('#daysdiv').append(str);
 			$('#day').html(day);
+			$('#textarea_'+day).summernote({
+			    height: 200,width: 1239,
+			    callbacks: {
+			        onImageUpload: function(files, editor, welEditable) {
+			            sendFile(files[0], editor, welEditable,this.id);
+			        }
+			    }
+			});
 		}
-$(document).ready(function() {
+
   
-  $('#leisureOverview').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'leisureOverview');
-        }
-    }
-});
-    $('#thingsCarry').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'thingsCarry');
-        }
-    }
-});
-    $('#terms').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'terms');
-        }
-    }
-});
-    $('#mapImage').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'mapImage');
-        }
-    }
-});
+  $('textarea').summernote({
+	    height: 200,width: 1239,
+	    callbacks: {
+	        onImageUpload: function(files, editor, welEditable) {
+	            sendFile(files[0], editor, welEditable,this.id);
+	        }
+	    }
+	});
+    
 
   function sendFile(file, editor, welEditable,summernotid) {
   	//alert('hi');
@@ -149,7 +138,7 @@ $(document).ready(function() {
       }
     });
   }
-});
+
 		</script>
 		</body>
 </html>

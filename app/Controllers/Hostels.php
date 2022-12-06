@@ -77,6 +77,23 @@
             $model->deleteHostelFaq($data);
            return $this->response->redirect(base_url('/hostelsFaq/'.$hostel_id)); 
         }
+        public function deletehostelgallery($faq_id,$hostel_id){
+            
+            $model = new Hostels_model();
+            $id = $this->request->getVar('id');
+            $image_name= $this->request->getVar('image_name');
+
+            $data = array(
+                'image_id' => $id,
+                'image_name' => $image_name,
+                'status' => '9',
+                'modified_by' => '1',
+                'modified_date' => date('Y-m-d H:i:s')
+            );  
+            $res = $model->deletegallery($data);
+           echo json_encode($res);
+           
+        }
 
          public function hostelGallery($hostel_id){
             $data['hostel_id'] = $hostel_id;

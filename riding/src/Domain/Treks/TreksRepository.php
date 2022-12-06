@@ -975,12 +975,16 @@ class TreksRepository
   }
   public function deleteTrekGallery($data) {
     try {
+      
       extract($data);
-      $query = "UPDATE sg_trek_gallery SET recordstatus='9' where image_id=:image_id";
+      $query = "UPDATE sg_trek_gallery SET recordstatus='9',modified_date=:modified_date,modified_by=:modified_by where image_id=:image_id ";
       $stmt = $this->connection->prepare($query);
-      $stmt->bindParam(':image_id',$image_id);
+      $stmt->bindParam(':image_id',$image_id,PDO::PARAM_STR);
+      $stmt->bindParam(':modified_date',$modified_date,PDO::PARAM_STR);
+      $stmt->bindParam(':modified_by',$modified_by,PDO::PARAM_STR);
       $res=$stmt->execute();
       if($res=='true'){ 
+       unlink(UPLOADPATH.'/treksgallery/'.$image_name);
         $status = array(
           'status' => "200",
           'message' => "Image Deleted Successfully");

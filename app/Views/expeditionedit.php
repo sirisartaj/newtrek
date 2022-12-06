@@ -10,57 +10,57 @@
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
+<style type="text/css">
+   .form-control input
+    {
+      width: 1239px !important;      
+    }        
+</style>
     
 	</head>
-	<body>
+	<body><div class="container" style="margin:0;">
 		<form action="<?php echo base_url().'/editexpedition'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
-			<?php //echo "<pre>";
-					//print_r($result);
-			?>
-		<table>
-			<tr>
-				<td>expedition</td>
-				<td>:</td>
-				<td><?php //echo $result->expedition_title; ?>
-					<input type="text" name="expedition_title" value="<?php echo $result->expedition_title; ?>"/> 
-					<input type="hidden" name="expedition_id" value="<?php echo $result->expedition_id; ?>"/> 
-				</td>
-			</tr><tr>
-				<td>Overview</td>
-				<td>:</td>
-				<td><textarea name="expedition_overview" id="expedition_overview" class="summernote"><?php echo $result->expedition_overview; ?></textarea></td>
-			</tr>
+			<div class="form-group">
+        <div class="mb-3">
+          <label for="" class="form-label">Trip Title</label>
+          <input type="text" class="form-control" name="expedition_title" value="<?php echo $result->expedition_title; ?>"placeholder="Title" style="width: 1239px !important;"/>
+          <input type="hidden" class="form-control" name="expedition_id" value="<?php echo $result->expedition_id; ?>"placeholder="Title" style="width: 1239px !important;"/>
+        </div>
+        
 
-			<tr>
-				<td>Things to carry</td>
-				<td>:</td>
-				<td><textarea name="things_carry" id="things_carry" class="summernote"><?php echo $result->things_carry; ?></textarea></td>
-			</tr>
-			<tr>
-				<td>Terms&Conditions</td>
-				<td>:</td>
-				<td><textarea name="terms" id="terms" class="summernote"><?php echo $result->terms; ?></textarea></td>
-			</tr>
-			<tr>
-				<td>How to reach</td>
-				<td>:</td>
-				<td><textarea name="map_image" id="map_image" class="summernote"><?php echo $result->map_image; ?></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="3" align="center">
-					<input type="submit" name="submit" value="Update">
-					<input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
-				</td>
-			</tr>
-		</table>
-		</form>
+        <div class="mb-3">
+          <label for="" class="form-label">Overview</label>
+          <textarea name="expedition_overview" id="expedition_overview" class="summernote"><?php echo $result->expedition_overview; ?></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="" class="form-label">Things to carry</label>
+          <textarea name="things_carry" id="things_carry" class="summernote"><?php echo $result->things_carry; ?></textarea>
+          
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Terms & Conditions</label>
+          <textarea name="terms" id="terms" class="summernote"><?php echo $result->terms; ?></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">How to reach</label>
+          <textarea name="map_image" id="map_image" class="summernote"><?php echo $result->map_image; ?></textarea>
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" name="submit" value="Update">
+            <input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
+        </div>
+    </div>
 		
+		</form>
+		</div>
 	<script> 
 //$(document).ready(function() {
   
   $('#expedition_overview').summernote({
     height: 200,
+    width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'expedition_overview');
@@ -69,6 +69,7 @@
 });
     $('#things_carry').summernote({
     height: 200,
+    width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'things_carry');
@@ -77,6 +78,7 @@
 });
     $('#terms').summernote({
     height: 200,
+    width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'terms');
@@ -85,6 +87,7 @@
 });
     $('#map_image').summernote({
     height: 200,
+    width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'map_image');

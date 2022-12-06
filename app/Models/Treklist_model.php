@@ -73,6 +73,12 @@
 			$data['createdBy'] = '1';
 			return $home->CallAPI('POST',$url,$data);
 		}
+		public function deletetrekgallery($data){
+			$home = new Home();
+			echo $url = base_url_SLim.'/treks/deleteTrekGallery';
+			print_r(json_encode($data));exit;
+			return $home->CallAPI('POST',$url,$data);
+		}
 
 		public function getTrekitinerary($trek_id =""){       
 	        $home = new home();

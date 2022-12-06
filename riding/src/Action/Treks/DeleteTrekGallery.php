@@ -18,7 +18,9 @@ final class DeleteTrekGallery
       ResponseInterface $response, $args 
   ): ResponseInterface
   {
-    $treks = $this->treks->deleteTrekGallery($args);
+    $data = $request->getBody();
+    $data =(array) json_decode($data);
+    $treks = $this->treks->deleteTrekGallery($data);
     $response->getBody()->write((string)json_encode($treks));
     return $response
           ->withHeader('Content-Type', 'application/json');

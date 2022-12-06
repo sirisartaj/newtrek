@@ -14,71 +14,55 @@
     
 	</head>
 	<body>
+		<div class="container" style="margin:0;">
 		<form action="<?php echo base_url().'/storeBiketrip'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
-			<?php //echo "<pre>";
-					//print_r($result);
-			?>
-		<table>
-			<tr>
-				<td>trip</td>
-				<td>:</td>
-				<td>
-					<input type="text" name="trip_title" value="<?= set_value('trip_title');?>"/> 
-					
-				</td>
-			</tr>
-			<tr>
-				<td>trip Fee</td>
-				<td>:</td>
-				<td>
-					<input type="text" name="trip_fee" value="<?= set_value('trip_fee');?>"/> 
-					
-				</td>
-			</tr>
-			<tr>
-				<td>trip Days</td>
-				<td>:</td>
-				<td>
-					<input type="text" name="trip_days" value="<?= set_value('trip_fee');?>"/> 
-					
-				</td>
-			</tr>
+	<div class="form-group">
+        <div class="mb-3">
+          <label for="" class="form-label">Trip Title</label>
+          <input type="text" class="form-control" name="trip_title" value="<?= set_value('trip_title');?>"placeholder="Title" style="width: 1239px !important;" />
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Trip Fee</label>
+          <input type="text" class="form-control" name="trip_fee" value="<?= set_value('trip_fee');?>" style="width: 1239px !important;"/> 
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Trip Days</label>
+          <input type="text" class="form-control" name="trip_days" value="<?= set_value('trip_days');?>" style="width: 1239px !important;"/>
+        </div>
 
-			<tr>
-				<td>Overview</td>
-				<td>:</td>
-				<td><textarea name="trip_overview" id="tripOverview" class="summernote"></textarea></td>
-			</tr>
+        <div class="mb-3">
+          <label for="" class="form-label">Overview</label>
+          <textarea name="trip_overview" id="tripOverview" class="summernote"><?php echo $result->tripOverview; ?></textarea>
+        </div>
 
-			<tr>
-				<td>Things to carry</td>
-				<td>:</td>
-				<td><textarea name="things_carry" id="thingsCarry" class="summernote"></textarea></td>
-			</tr>
-			<tr>
-				<td>Terms&Conditions</td>
-				<td>:</td>
-				<td><textarea name="terms" id="terms" class="summernote"></textarea></td>
-			</tr>
-			<tr>
-				<td>How to reach</td>
-				<td>:</td>
-				<td><textarea name="map_image" id="mapImage" class="summernote"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="3" align="center">
-					<input type="submit" name="submit" value="Save">
-					<input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
-				</td>
-			</tr>
-		</table>
-		</form>
+        <div class="mb-3">
+          <label for="" class="form-label">Things to carry</label>
+          <textarea name="things_carry" id="thingsCarry" class="summernote"><?php echo $result->thingsCarry; ?></textarea>
+          
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Terms & Conditions</label>
+          <textarea name="terms" id="terms" class="summernote"><?php echo $result->termsConditions; ?></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">How to reach</label>
+          <textarea name="map_image" id="mapImage" class="summernote"><?php echo $result->howToReach; ?></textarea>
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" name="submit" value="Save">
+            <input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
+        </div>
+    </div>
 		
+		</form>
+		</div>
 	<script> 
-$(document).ready(function() {
+
   
   $('#tripOverview').summernote({
     height: 200,
+    width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'tripOverview');
@@ -87,6 +71,7 @@ $(document).ready(function() {
 });
     $('#thingsCarry').summernote({
     height: 200,
+    width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'thingsCarry');
@@ -95,6 +80,7 @@ $(document).ready(function() {
 });
     $('#terms').summernote({
     height: 200,
+    width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'terms');
@@ -103,6 +89,7 @@ $(document).ready(function() {
 });
     $('#mapImage').summernote({
     height: 200,
+    width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'mapImage');
@@ -131,7 +118,6 @@ $(document).ready(function() {
       }
     });
   }
-});
 		</script>
 		</body>
 </html>

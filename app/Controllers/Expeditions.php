@@ -75,6 +75,23 @@
             $model->deleteExpeditionFaq($data);
            return $this->response->redirect(base_url('/expeditionsFaq/'.$expedition_id)); 
         }
+        public function galleryimagedelete(){
+            
+            $model = new Expedition_model();
+            $id = $this->request->getVar('id');
+            $image_name= $this->request->getVar('image_name');
+            $data = array(
+                'image_id' => $id,
+                'image_name' => $image_name,
+                'status' => '9',
+                'modified_by' => '1',
+                'modified_date' => date('Y-m-d H:i:s')
+            );  
+            $res = $model->galleryimagedelete($data);
+           echo json_encode($res); 
+            
+           
+        }
 
         public function expeditionGallery($expedition_id){
             $data['expedition_id'] = $expedition_id;
@@ -129,7 +146,7 @@
             $rules = [
                 'Expedition_fee'      => 'required',
                 'Expedition_days'      => 'required',
-                'Expedition_title'      => 'required|is_unique[sg_Expeditionsdetails.Expedition_title]'
+                'Expedition_title'      => 'required'
             ];
             
             if($this->validate($rules)){ 
@@ -152,14 +169,10 @@
                 ];
 
                 $a = $ExpeditionsModel->addExpedition($data);
-                //print_r($a);exit;
+                return redirect()->to('expeditionsList');
                 if($a->status ==200){
                     $_SESSION['message'] = $a->message;
-                    return redirect()->to('addExpedition');
-                }else{
-
-                    $data['validation'] = $this->validator;
-                    echo view('addExpedition', $data);
+                    return redirect()->to('expeditionsList');
                 }
                 
             }else{

@@ -14,12 +14,10 @@
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<style type="text/css">		
-		
-		.form-control input
-		{
-		  width: 1239px;
-		  
-		}
+	.form-control input
+	{
+	  width: 1239px;	  
+	}
 	</style>
     
 	</head> 
@@ -71,14 +69,14 @@
 			$('#daysdiv').append(str);
 			$('#day').html(day);
 			$('#newtextarea'+day).summernote({
-		    height: 200,width: 1239,
-		    callbacks: {
-		        onImageUpload: function(files, editor, welEditable) {
-		        	console.log(this.id);
-		            sendFile(files[0], editor, welEditable,this.id);
-		        }
-		    }
-		});
+			    height: 200,width: 1239,
+			    callbacks: {
+			        onImageUpload: function(files, editor, welEditable) {
+			        	console.log(this.id);
+			            sendFile(files[0], editor, welEditable,this.id);
+			        }
+			    }
+			});
 		}
 
 		
@@ -112,7 +110,35 @@
 		      }
 	    	});
 	  	}
-	 
+	 function deletea(a){
+		console.log(a);
+				Swal.fire({
+				  title: 'Are you sure?',
+				  text: "You won't be able to revert this!",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+				  	$.ajax({
+				      
+				      type: "GET",
+				      url: '<?php echo base_url()."/deletetrekitinerary/";?>'+a,
+				      cache: false,
+				      contentType: false,
+				      processData: false,
+				      success: function(result1) {
+				      	console.log(result1);
+				      	location.reload();
+				      	 
+				      }
+				    });
+				    
+				  }
+				})
+			}
 	</script>
 </body>
 </html>

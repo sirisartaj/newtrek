@@ -23,6 +23,21 @@
     $data['tripId'] = $tripId;  
     return view('addBikeFaqs',$data);
   }
+  public function deletebikegallery(){ 
+    $model = new Biketrip_model(); 
+    $id = $this->request->getVar('id');
+    $image_name= $this->request->getVar('image_name');
+
+    $data = array(
+        'image_id' => $id,
+        'image_name' => $image_name,
+        'status' => '9',
+        'modified_by' => '1',
+        'modified_date' => date('Y-m-d H:i:s')
+    );  
+    $res = $model->deletegallery($data);
+   echo json_encode($res);
+  }
   public function saveFaq(){
     $model = new Biketrip_model();
     $data = array(
@@ -184,11 +199,11 @@
            $rules = [
                 'trip_fee'      => 'required',
                 'trip_days'      => 'required',
-                'trip_title'      => 'required|is_unique[sg_tripingdetails.trip_title]'
+                'trip_title'      => 'required'
             ];
             // echo "hi";
             if($this->validate($rules)){  
-                echo "validate";die;
+               
                 $BikeModel = new Biketrip_model();
                 $trip_overview = str_replace('"','\'', $this->request->getVar('trip_overview'));
                 $things_carry = str_replace('"','\'', $this->request->getVar('things_carry'));
@@ -208,14 +223,10 @@
                 ];
 
                 $a = $BikeModel->addtrip($data);
-                //print_r($a);exit;
+                return redirect()->to('bikeTripList');
                 if($a->status ==200){
                     $_SESSION['message'] = $a->message;
-                    return redirect()->to('addtrip');
-                }else{
-
-                    $data['validation'] = $this->validator;
-                    echo view('addtrip', $data);
+                    return redirect()->to('bikeTripList');
                 }
                 
             }else{
@@ -241,6 +252,7 @@
                 $data = [
                     'biketrips_id'    => $this->request->getVar('trip_id'),
                     'trip_title'    => $this->request->getVar('trip_title'),
+                    'tripTitle'    => $this->request->getVar('trip_title'),
                     'trip_overview'=> htmlspecialchars($trip_overview, ENT_QUOTES),
                     'things_carry' => htmlspecialchars($things_carry, ENT_QUOTES),
                     'terms_conditions' => htmlspecialchars($terms, ENT_QUOTES),
@@ -252,7 +264,7 @@
                
                $a = $BikeModel->edittripdata($data);
                
-                return redirect()->to('/biketripslist');
+                return redirect()->to('/bikeTripList');
             }else{
                 $rules = [];
                 $trip = (array) $BikeModel->getTrip($trip_id);           

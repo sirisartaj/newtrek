@@ -11,7 +11,8 @@
 	</head>
 	
 	<body>
-		
+		<div class="container" style="margin:0;">
+			<a href="<?php echo base_url();?>/addTrek" class="btn btn-primary">Add</a></div>
 		<table class="table">
 			<thead>
 				<tr>

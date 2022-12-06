@@ -9,25 +9,25 @@
 
 		public function getHostelsLists(){
 			$home = new Home();
-	  		$url = base_url().'/riding/hostels/gethostels';
+	  		$url = base_url_SLim.'/hostels/gethostels';
 	  		return $home->CallAPI('GET',$url);
 		}
 
 		public function getHostelsFaqs($hostel_id){
 			$home = new Home();
-			$url = base_url().'/riding/hostels/getfaq/'.$hostel_id;
+			$url = base_url_SLim.'/hostels/getfaq/'.$hostel_id;
 			return $home->CallAPI('GET',$url);
 		}
 
 		public function getCategories(){
 			$home = new Home();
-			$url = base_url().'/riding/faq/getfaqcategories';
+			$url = base_url_SLim.'/faq/getfaqcategories';
 			return $home->CallAPI('GET',$url);
 		}
 
 		public function saveFaq($data){
 			$home = new Home();
-			$url = base_url().'/riding/hostels/addhostelfaq';
+			$url = base_url_SLim.'/hostels/addhostelfaq';
 			$data['status'] = 0;
 			$data['createdBy'] = '1';
 			return $home->CallAPI('POST',$url,$data);
@@ -35,13 +35,13 @@
 		
 		public function getEditFaq($faq_id){
 			$home = new Home();
-			$url = base_url().'/riding/hostels/getEditFaq/'.$faq_id;
+			$url = base_url_SLim.'/hostels/getEditFaq/'.$faq_id;
 			return $home->CallAPI('GET',$url);
 		}
 
 		public function updateFaq($data){
 			$home = new Home();
-			$url = base_url().'/riding/hostels/updatehostelfaq'; 
+			$url = base_url_SLim.'/hostels/updatehostelfaq'; 
 			$data['status'] = 0;
 			$data['createdBy'] = '1';
 			return $home->CallAPI('POST',$url,$data);
@@ -49,24 +49,29 @@
 
 		public function deleteHostelFaq($data){
 			$home = new Home();
-			$url = base_url().'/riding/hostels/updatehostelfaqstatus';
+			$url = base_url_SLim.'/hostels/updatehostelfaqstatus';
 			return $home->CallAPI('POST',$url,$data);
 		}
 
 		public function getGalleryimages($hostel_id){
 			$home = new Home();
-			echo $url = base_url().'/riding/hostels/getgallery/'.$hostel_id;
+			echo $url = base_url_SLim.'/hostels/getgallery/'.$hostel_id;
 			return $home->CallAPI('GET',$url);
 		}
 		
 		public function addgalleryDetails($data){
 			$home = new Home();
-			$url = base_url().'/riding/hostels/addgallery';
+			$url = base_url_SLim.'/hostels/addgallery';
 			$data['status'] = 0;
 			$data['createdBy'] = '1';
 			return $home->CallAPI('POST',$url,$data);
 		}
 		
+		public function deletegallery($data){           
+	        $home = new Home();   
+	       $url = base_url_SLim.'/hostels/deletegallery';
+	       return $home->CallAPI('POST',$url,$data);          
+	    }
 
 		
 		

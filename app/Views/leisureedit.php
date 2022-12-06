@@ -1,22 +1,3 @@
-<?php
-/*
-include("db.php");
-
-$leisureId = $_GET['leisureId'];
-if(isset($_POST['submit'])) {
-	extract($_POST);
-	$stmt2 = $conn->prepare("UPDATE  sg_trekingdetails SET trekOverview='".$trekOverview."', terms='".$terms."', mapImage='".$mapImage."', thingsCarry='".$thingsCarry."' WHERE leisureId=".$leisureId);
-	$res = $stmt2->execute();
-	
-}
-$stmt = $conn->prepare("SELECT * FROM sg_trekingdetails WHERE leisureId=".$leisureId);
-$stmt->execute();
-
-// set the resulting array to associative
-$result = $stmt->fetch(PDO::FETCH_OBJ);
-*/
-
-?>
 <html>
 <head>
 	<title>Treking</title>
@@ -34,52 +15,48 @@ $result = $stmt->fetch(PDO::FETCH_OBJ);
 	</head>
 	<body>
 		<form action="<?php echo base_url().'/editLeisure'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
-			<?php //echo "<pre>";
-					//print_r($result);
-			?>
-		<table>
-			<tr>
-				<td>Trek</td>
-				<td>:</td>
-				<td><?php //echo $result->trekTitle; ?>
-					<input type="text" name="pkg_name" value="<?php echo $result->pkgName; ?>"/> 
-					<input type="hidden" name="leisure_id" value="<?php echo $result->leisureId; ?>"/> 
-				</td>
-			</tr><tr>
-				<td>Overview</td>
-				<td>:</td>
-				<td><textarea name="pkg_overview" id="pkg_overview" class="summernote"><?php echo $result->pkgOverview; ?></textarea></td>
-			</tr>
+			<div class="form-group">
+        <div class="mb-3">
+          <label for="" class="form-label">Trip Title</label>
+          <input type="text" class="form-control inputwidth" name="pkg_name" value="<?php echo $result->pkgName; ?>"placeholder="Title" style="width: 1239px;"/> 
+          <input type="hidden" class="form-control" name="leisure_id" value="<?php echo $leisure_id; ?>"placeholder="Title" style="width: 1239px;"/> 
+             
 
-			<tr>
-				<td>inclusionExclusion</td>
-				<td>:</td>
-				<td><textarea name="inclusion_exclusion" id="inclusion_exclusion" class="summernote"><?php echo $result->inclusionExclusion; ?></textarea></td>
-			</tr>
-			<tr>
-				<td>Terms&Conditions</td>
-				<td>:</td>
-				<td><textarea name="terms_conditions" id="terms" class="summernote"><?php echo $result->termsConditions; ?></textarea></td>
-			</tr>
-			<tr>
-				<td>How to reach</td>
-				<td>:</td>
-				<td><textarea name="where_report" id="where_report" class="summernote"><?php echo $result->whereReport; ?></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="3" align="center">
-					<input type="submit" name="submit" value="Update">
-					<input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
-				</td>
-			</tr>
-		</table>
+        </div>
+        
+        <div class="mb-3">
+          <label for="" class="form-label">Overview</label>
+          <textarea name="pkg_overview" id="pkg_overview" class="summernote"><?php echo $result->pkgOverview; ?></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="" class="form-label">Inclusion Exclusion</label>
+          <textarea name="inclusion_exclusion" id="inclusion_exclusion" class="summernote"><?php echo $result->inclusionExclusion; ?></textarea>
+          
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Terms & Conditions</label>
+          <textarea name="terms_conditions" id="terms" class="summernote"><?php echo $result->termsConditions; ?></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">How to reach</label>
+          <textarea name="where_report" id="where_report" class="summernote"><?php echo $result->whereReport; ?></textarea>
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" name="submit" value="Update">
+            <input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
+        </div>
+    </div>
+
+		
 		</form>
 		
 	<script> 
 //$(document).ready(function() {
   
   $('#pkg_overview').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'pkg_overview');
@@ -87,7 +64,7 @@ $result = $stmt->fetch(PDO::FETCH_OBJ);
     }
 });
     $('#inclusion_exclusion').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'inclusion_exclusion');
@@ -95,7 +72,7 @@ $result = $stmt->fetch(PDO::FETCH_OBJ);
     }
 });
     $('#terms').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'terms');
@@ -103,7 +80,7 @@ $result = $stmt->fetch(PDO::FETCH_OBJ);
     }
 });
     $('#where_report').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'where_report');

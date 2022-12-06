@@ -20,7 +20,7 @@ final class UpdateLeisurePackage
   {
    $data = $request->getBody();
     $data =(array) json_decode($data);    
-    $leisurePackages = $this->leisurePackages->editLeisureIterinary($data);
+    $leisurePackages = $this->leisurePackages->updateLeisurePackage($data); 
     $response->getBody()->write((string)json_encode($leisurePackages));
     return $response
           ->withHeader('Content-Type', 'application/json');

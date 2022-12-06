@@ -55,35 +55,22 @@ class ExpeditionsRepository
   public function insertExpedition($data) {
     try {
       extract($data);
-      $sql = "INSERT INTO sg_expeditions (expedition_title, expedition_fee, visit_time, time_visit, expedition_overview, expedition_days, expedition_nights, region, expeditionvideo_title, expeditionvideo_url, season, things_carry, overview_image, expedition_image, gst, map_image, temperature, terms, faq, popular_expedition, meta_title, meta_desc, altitude, status, created_date, created_by)VALUES(:expedition_title, :expedition_fee, :difficult, :time_visit, :expedition_overview, :expedition_days, :expedition_nights, :region, :expeditionvideo_title, :expeditionvideo_url, :season, :things_carry, :overview_image, :expedition_image, :gst, :map_image, :temperature, :terms, :faq, :popular_expedition, :meta_title, :meta_desc, :altitude, :status, :created_date, :created_by)";
-      $stmt = $this->connection->prepare($sql);         
-      $season_details = implode(",",$season);
-      $stmt->bindParam(':expedition_title', $expeditionTitle);
-      $stmt->bindParam(':expedition_fee', $expeditionFee);
-      $stmt->bindParam(':difficult', $difficult);
-      $stmt->bindParam(':time_visit',$timeVisit);
-      $stmt->bindParam(':expedition_overview',$expeditionOverview);
-      $stmt->bindParam(':expedition_days', $expeditionDays);
-      $stmt->bindParam(':expedition_nights', $expeditionNights);
-      $stmt->bindParam(':region', $region);
-      $stmt->bindParam(':expeditionvideo_title', $expeditionVideoTitle);
-      $stmt->bindParam(':expeditionvideo_url', $expeditionVideoUrl);
-      $stmt->bindParam(':season',$seasonDetails);
-      $stmt->bindParam(':things_carry', $thingsCarry);
-      $stmt->bindParam(':expedition_image', $expeditionImage);
-      $stmt->bindParam(':overview_image', $overviewImage);
-      $stmt->bindParam(':gst', $gst);
-      $stmt->bindParam(':map_image', $mapImage);
+      $sql = "INSERT INTO sg_expeditions (expedition_title, expedition_fee,expedition_overview, expedition_days,things_carry,map_image,terms,status, created_date, created_by)VALUES(:expedition_title, :expedition_fee,:expedition_overview, :expedition_days,:things_carry,:map_image, :terms, :status, :created_date, :created_by)";
+      $stmt = $this->connection->prepare($sql); 
+      $stmt->bindParam(':expedition_title', $Expedition_title);
+      $stmt->bindParam(':expedition_fee', $Expedition_fee);
+      
+      $stmt->bindParam(':expedition_overview',$Expedition_overview);
+      $stmt->bindParam(':expedition_days', $Expedition_days);
+      
+      $stmt->bindParam(':things_carry', $things_carry);
+      
+      $stmt->bindParam(':map_image', $map_image);
       $stmt->bindParam(':terms', $terms);
-      $stmt->bindParam('faq',$faq);
-      $stmt->bindParam(':popular_expedition', $popularExpedition);
-      $stmt->bindParam(':temperature',$temperature);
-      $stmt->bindParam(':meta_title',$metaTitle);
-      $stmt->bindParam(':meta_desc',$metaDesc);
-      $stmt->bindParam(':altitude',$altitude);
+      
       $stmt->bindParam(':status', $status);
-      $stmt->bindParam(':created_date' , $createdDate);
-      $stmt->bindParam(':created_by' , $createdBy);
+      $stmt->bindParam(':created_date' , $created_date);
+      $stmt->bindParam(':created_by' , $created_by);
       $stmt->execute();
       $expedition_id = $this->connection->lastInsertId();
       return $expedition_id;     
@@ -1012,11 +999,14 @@ class ExpeditionsRepository
   public function deleteExpeditionGallery($data) {
     try {
       extract($data);
-      $query = "UPDATE sg_expedition_gallery SET recordstatus='9' where image_id=:image_id";
+      $query = "UPDATE sg_expedition_gallery SET recordstatus='9',modified_date=:modified_date,modified_by=:modified_by where image_id=:image_id";
       $stmt = $this->connection->prepare($query);
       $stmt->bindParam(':image_id',$image_id);
+      $stmt->bindParam(':modified_date',$modified_date,PDO::PARAM_STR);
+      $stmt->bindParam(':modified_by',$modified_by,PDO::PARAM_STR);
       $res=$stmt->execute();
       if($res=='true'){ 
+        unlink(UPLOADPATH.'/expeditions/'.$image_name);
         $status = array(
           'status' => "200",
           'message' => "Image Deleted Successfully");

@@ -10,11 +10,16 @@
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
+<style type="text/css">
+   .form-control input
+    {
+      width: 1239px !important;      
+    }        
+</style>
     
 	</head>
 	<body>
-		<div class="container">
+		<div class="container" style="margin:0">
 			<form action="<?php echo base_url().'/expeditioniterinarystore'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
 				<input type="hidden" class="form-control" id="expedition_id" name="expedition_id" placeholder="" value="<?php echo $expedition_id;?>">
 				<?php 
@@ -30,7 +35,7 @@
 					  <label for="exampleFormControlInput1" class="form-label">Title</label>
 					  <input type="hidden" class="form-control" id="iterinary_id" name="iterinary_id[]" placeholder="" value="<?php echo $t->iterinary_id;?>">
 
-					  <input type="text" class="form-control" id="iterinary_title" name="iterinary_title[]" placeholder="iterinary title" value="<?php echo $t->iterinary_title;?>">
+					  <input type="text" class="form-control" id="iterinary_title" name="iterinary_title[]" placeholder="iterinary title" value="<?php echo $t->iterinary_title;?>"  style="width: 1239px !important;">
 
 					</div>
 					<div class="mb-3">
@@ -89,44 +94,30 @@
 			}
 		function addday(){
 			 day = parseInt($('#day').html())+1;
-			var str = '<div class="form-group "><div class="btn btn-sm btn-danger">day '+day+'</div></div><div class="form-group"><div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Title</label><input type="hidden" class="form-control" id="iterinary_id" name="iterinary_id[]" placeholder="" value=""><input type="text" class="form-control" id="iterinary_title" name="iterinary_title[]" placeholder="iterinary title" value=""></div><div class="mb-3"><label for="exampleFormControlTextarea1" class="form-label">Description</label><textarea class="form-control" id="exampleFormControlTextarea1" name="iterinary_details[]" rows="3"></textarea></div></div>';
+			var str = '<div class="form-group "><div class="btn btn-sm btn-danger">day '+day+'</div></div><div class="form-group"><div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Title</label><input type="hidden" class="form-control" id="iterinary_id" name="iterinary_id[]" placeholder="" value=""><input type="text" class="form-control" id="iterinary_title" name="iterinary_title[]" placeholder="iterinary title" value=""  style="width: 1239px !important;"></div><div class="mb-3"><label for="textarea_'+day+'" class="form-label">Description</label><textarea class="form-control" id="textarea_'+day+'" name="iterinary_details[]" rows="3"></textarea></div></div>';
 			$('#daysdiv').append(str);
 			$('#day').html(day);
+			$('#textarea_'+day).summernote({
+			    height: 200,width: 1239,
+			    callbacks: {
+			        onImageUpload: function(files, editor, welEditable) {
+			            sendFile(files[0], editor, welEditable,this.id);
+			        }
+			    }
+			});
 		}
-$(document).ready(function() {
+
   
-  $('#expeditionOverview').summernote({
+  $('textarea').summernote({
     height: 200,
+    width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'expeditionOverview');
+            sendFile(files[0], editor, welEditable,this.id);
         }
     }
 });
-    $('#thingsCarry').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'thingsCarry');
-        }
-    }
-});
-    $('#terms').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'terms');
-        }
-    }
-});
-    $('#mapImage').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'mapImage');
-        }
-    }
-});
+    
 
   function sendFile(file, editor, welEditable,summernotid) {
   	//alert('hi');
@@ -149,7 +140,6 @@ $(document).ready(function() {
       }
     });
   }
-});
 		</script>
 		</body>
 </html>

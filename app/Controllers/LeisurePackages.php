@@ -122,6 +122,24 @@
         }
 
         /* sartaj code*/
+
+         public function galleryimagedelete(){
+            
+            $model = new LeisurePackages_model();
+            $id = $this->request->getVar('id');
+            $image_name= $this->request->getVar('image_name');
+            $data = array(
+                'image_id' => $id,
+                'image_name' => $image_name,
+                'status' => '9',
+                'modified_by' => '1',
+                'modified_date' => date('Y-m-d H:i:s')
+            );  
+            $res = $model->galleryimagedelete($data);
+           echo json_encode($res); 
+            
+           
+        }
         public function storeleisure(){
             helper(['form']);
            $rules = [            
@@ -147,19 +165,19 @@
                 ];
 
                 $a = $LeisurepackagesModel->addleisure($data);
-                //print_r($a);exit;
+                return redirect()->to('leisurepackagesList');
                 if($a->status ==200){
                     $_SESSION['message'] = $a->message;
-                    return redirect()->to('leisure');
+                    return redirect()->to('leisurepackagesList');
                 }else{
 
                     $data['validation'] = $this->validator;
-                    echo view('leisurepackages\addleisure', $data);
+                    echo view('addleisure', $data);
                 }
                 
             }else{
                 $data['validation'] = $this->validator;
-                echo view('leisurepackages\addleisure', $data);
+                echo view('addleisure', $data);
             }
         }
 
@@ -172,7 +190,7 @@
              }else{
                 $data['validation'] = $this->validator;
             
-                echo view('addleisure',$data);
+                echo view('/addleisure',$data);
             }
         }
 
@@ -264,7 +282,7 @@
             if($leisure['status'] =200){
                  $data['result']  = $leisure['leisure']->Packages;
             }
-            
+            $data['leisure_id'] = $leisure_id;
             $data['Headding']="Edit leisure";
             if($this->validate($rules)){}else{
                 $data['validation'] = $this->validator;
@@ -278,12 +296,11 @@
             helper(['form']);
             $rules = [ ];
             $leisure = (array) $LeisurepackagesModel->get_itinerary_leisure($leisure_id);
-            //print_r($leisure);exit;
+            
             if($leisure['status'] =200){
                  $data['result']  = json_decode(json_encode($leisure['leisure']));
             }
-           // echo "<pre>";
-            //print_r($data['result']);
+           
             $data['Headding']="Itinerary leisure";
             if($this->validate($rules)){
 

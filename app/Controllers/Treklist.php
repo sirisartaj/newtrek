@@ -125,6 +125,25 @@
         }
 
         /* sartaj code*/
+        public function deletetrekgallery(){
+           // print_r($this->request->getVar());exit;
+            $id = $this->request->getVar('id');
+            $image_name= $this->request->getVar('image_name');
+
+
+            $model = new Treklist_model();
+            $data = array(
+                'image_id' => $id,
+                'image_name' => $image_name,
+                'status' => '9',
+                'modified_by' => '1',
+                'modified_date' => date('Y-m-d H:i:s')
+            );  
+            $res = $model->deletetrekgallery($data);
+           echo json_encode($res);
+           //return redirect()->to('/trekList');
+        }
+
         public function gettrekitinerary($trek_id=''){
             $TrekModel = new Treklist_model();
             $data['trek_id'] =$trek_id;

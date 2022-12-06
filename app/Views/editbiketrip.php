@@ -1,22 +1,3 @@
-<?php
-/*
-include("db.php");
-
-$trip_id = $_GET['trip_id'];
-if(isset($_POST['submit'])) {
-	extract($_POST);
-	$stmt2 = $conn->prepare("UPDATE  sg_tripingdetails SET tripOverview='".$tripOverview."', terms='".$terms."', mapImage='".$mapImage."', thingsCarry='".$thingsCarry."' WHERE trip_id=".$trip_id);
-	$res = $stmt2->execute();
-	
-}
-$stmt = $conn->prepare("SELECT * FROM sg_tripingdetails WHERE trip_id=".$trip_id);
-$stmt->execute();
-
-// set the resulting array to associative
-$result = $stmt->fetch(PDO::FETCH_OBJ);
-*/
-
-?>
 <html>
 <head>
 	<title>triping</title>
@@ -34,10 +15,38 @@ $result = $stmt->fetch(PDO::FETCH_OBJ);
 	</head>
 	<body>
 		<form action="<?php echo base_url().'/editBiketrip'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
-			<?php //echo "<pre>";
-					//print_r($result);
-			?>
-		<table>
+	 <div class="form-group">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Trip Title</label>
+          <input type="text" class="form-control" name="trip_title" value="<?php echo $result->tripTitle; ?>"placeholder="Title" /> 
+            <input type="hidden" name="trip_id" value="<?php echo $result->tripId; ?>"/> 
+
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Overview</label>
+          <textarea name="trip_overview" id="tripOverview" class="summernote"><?php echo $result->tripOverview; ?></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Things to carry</label>
+          <textarea name="things_carry" id="thingsCarry" class="summernote"><?php echo $result->thingsCarry; ?></textarea>
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Terms & Conditions</label>
+          <textarea name="terms" id="terms" class="summernote"><?php echo $result->termsConditions; ?></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">How to reach</label>
+          <textarea name="map_image" id="mapImage" class="summernote"><?php echo $result->howToReach; ?></textarea>
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" name="submit" value="Update">
+            <input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
+        </div>
+    </div>
+		<!-- <table>
 			<tr>
 				<td>trip</td>
 				<td>:</td>
@@ -72,14 +81,14 @@ $result = $stmt->fetch(PDO::FETCH_OBJ);
 					<input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
 				</td>
 			</tr>
-		</table>
+		</table> -->
 		</form>
 		
 	<script> 
 //$(document).ready(function() {
   
   $('#tripOverview').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'tripOverview');
@@ -87,7 +96,7 @@ $result = $stmt->fetch(PDO::FETCH_OBJ);
     }
 });
     $('#thingsCarry').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'thingsCarry');
@@ -95,7 +104,7 @@ $result = $stmt->fetch(PDO::FETCH_OBJ);
     }
 });
     $('#terms').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'terms');
@@ -103,7 +112,7 @@ $result = $stmt->fetch(PDO::FETCH_OBJ);
     }
 });
     $('#mapImage').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'mapImage');

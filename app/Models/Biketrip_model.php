@@ -9,28 +9,28 @@
 
 		public function getBikeTripLists(){
 			$home = new Home();
-	  		$url = base_url().'/riding/biketrips/getbiketrips';
+	  		$url = base_url_SLim.'/biketrips/getbiketrips';
 	  		// echo $url;die();
 	  		return $home->CallAPI('GET',$url);
 		}
 
 		public function getBiketripFaqs($tripId){
 			$home = new Home();
-			$url = base_url().'/riding/biketrips/getfaq/'.$tripId;
+			$url = base_url_SLim.'/biketrips/getfaq/'.$tripId;
 			// echo $url;die(); 
 			return $home->CallAPI('GET',$url);
 		}
 
 		public function getCategories(){
 			$home = new Home();
-			$url = base_url().'/riding/faq/getfaqcategories';
+			$url = base_url_SLim.'/faq/getfaqcategories';
 			// echo $url;die();
 			return $home->CallAPI('GET',$url);
 		}
 
 		public function saveFaq($data){
 			$home = new Home();
-			$url = base_url().'/riding/biketrips/addtripfaq';
+			$url = base_url_SLim.'/biketrips/addtripfaq';
 			$data['status'] = 0;
 			$data['createdBy'] = '1';
 			// var_dump(json_encode($data));die();
@@ -39,14 +39,14 @@
 		
 		public function getEditFaq($faq_id){
 			$home = new Home();
-			$url = base_url().'/riding/biketrips/getEditFaq/'.$faq_id;
+			$url = base_url_SLim.'/biketrips/getEditFaq/'.$faq_id;
 			// echo $url;die();
 			return $home->CallAPI('GET',$url);
 		}
 
 		public function updateFaq($data){
 			$home = new Home();
-			$url = base_url().'/riding/biketrips/updatetripfaq'; 
+			$url = base_url_SLim.'/biketrips/updatetripfaq'; 
 			$data['status'] = 0;
 			$data['createdBy'] = '1';
 			// var_dump(json_encode($data));die;
@@ -56,21 +56,21 @@
 		public function deleteBikeFaq($data){
 			// var_dump(json_encode($data));die();
 			$home = new Home();
-			$url = base_url().'/riding/biketrips/updatetripfaqstatus';
+			$url = base_url_SLim.'/biketrips/updatetripfaqstatus';
 			// echo $url;die;
 			return $home->CallAPI('POST',$url,$data);
 		}
 		
 		public function getGalleryimages($trip_id){
 			$home = new Home();
-			$url = base_url().'/riding/biketrips/getgallery/'.$trip_id;
+			$url = base_url_SLim.'/biketrips/getgallery/'.$trip_id;
 			// echo $url;die();
 			return $home->CallAPI('GET',$url);
 		}
 		
 		public function addgalleryDetails($data){
 			$home = new Home();
-			$url = base_url().'/riding/biketrips/addgallery';
+			$url = base_url_SLim.'/biketrips/addgallery';
 			$data['status'] = 0;
 			$data['createdBy'] = '1';
 			return $home->CallAPI('POST',$url,$data);
@@ -80,37 +80,42 @@
 		public function get_itinerary_trip($trip_id =""){       
 	        $home = new Home();
 	        $data = array();
-	        $url = base_url().'/riding/biketrips/gettripitinerary/'.$trip_id;
+	        $url = base_url_SLim.'/biketrips/gettripitinerary/'.$trip_id;
 	        return $home->CallAPI('GET',$url,$data);	      
 	    }
 
 	     public function addtripiterinarydata($data){           
 	        $home = new home();   
-	        $url = base_url().'/riding//biketrips/addbiketripiterinary';//exit;
+	        $url = base_url_SLim.'//biketrips/addbiketripiterinary';//exit;
 	       return $home->CallAPI('POST',$url,$data);          
 	    }
 
 	    public function edittripiterinarydata($data){           
 	        $home = new Home();   
-	       $url = base_url().'/riding/biketrips/editbiketripiterinary';
+	       $url = base_url_SLim.'/biketrips/editbiketripiterinary';
 	       return $home->CallAPI('POST',$url,$data);          
 	    }
 
 	     public function addtrip($data){           
 	        $home = new Home();
-	       $url = base_url().'/riding/biketrips/addbiketrip';
+	       $url = base_url_SLim.'/biketrips/addbiketrip';
 	       return $home->CallAPI('POST',$url,$data);          
 	    }
 
 	    public function getTrip($trip_id =""){       
 	        $home = new Home();
-	        $url = base_url().'/riding/biketrips/getbiketrip/'.$trip_id;
+	        $url = base_url_SLim.'/biketrips/getbiketrip/'.$trip_id;
 	       return $home->CallAPI('GET',$url);	      
 	    }
 
 	    public function edittripdata($data){           
 	        $home = new Home();   
-	       $url = base_url().'/riding/biketrips/updatebiketrip';
+	       $url = base_url_SLim.'/biketrips/updatebiketrip';
+	       return $home->CallAPI('POST',$url,$data);          
+	    }
+	    public function deletegallery($data){           
+	        $home = new Home();   
+	       $url = base_url_SLim.'/biketrips/deletegallery';
 	       return $home->CallAPI('POST',$url,$data);          
 	    }
 

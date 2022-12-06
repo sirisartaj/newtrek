@@ -33,17 +33,17 @@
 <div class="form-group">
         <div class="mb-3">
           <label for="" class="form-label">Trek Title</label>
-          <input type="text" class="form-control" name="trek_title" value="<?= set_value('trek_title');?>"placeholder="Title" /> 
+          <input type="text" class="form-control" name="trek_title" value="<?= set_value('trek_title');?>"placeholder="Title" style="width: 1239px !important;"/> 
            
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Trek Fee</label>
-          <input type="text" class="form-control" name="trek_fee" value="<?= set_value('trek_fee');?>"placeholder="trek Fee" /> 
+          <input type="text" class="form-control" name="trek_fee" value="<?= set_value('trek_fee');?>"placeholder="trek Fee" style="width: 1239px !important;"/> 
            
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Trek Days</label>
-          <input type="text" class="form-control" name="trek_days" value="<?= set_value('trek_days');?>"placeholder="trek days" /> 
+          <input type="text" class="form-control" name="trek_days" value="<?= set_value('trek_days');?>"placeholder="trek days" style="width: 1239px !important;" /> 
            
         </div>
         <div class="mb-3">

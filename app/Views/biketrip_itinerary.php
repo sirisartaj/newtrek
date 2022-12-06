@@ -10,11 +10,16 @@
 	<!-- include summernote css/js -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
+	<style type="text/css">
+	   .inputwidth
+	    {
+	      width: 1239px !important;      
+	    }        
+	</style>
     
 	</head>
 	<body>
-		<div class="container">
+		<div class="container" style="margin:0">
 			<form action="<?php echo base_url().'/biketripIterinaryStore'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
 				<input type="hidden" class="form-control" id="biketrips_id" name="biketrips_id" placeholder="" value="<?php echo $trip_id;?>">
 				<?php 
@@ -27,15 +32,15 @@
 					</div>
 					<div class="form-group">
 						<div class="mb-3">
-					  <label for="exampleFormControlInput1" class="form-label">Title</label>
+					  <label for="" class="form-label">Title</label>
 					  <input type="hidden" class="form-control" id="iterinary_id" name="iterinary_id[]" placeholder="" value="<?php echo $t->iterinary_id;?>">
 
-					  <input type="text" class="form-control" id="iterinary_title" name="iterinary_title[]" placeholder="iterinary title" value="<?php echo $t->iterinary_title;?>">
+					  <input type="text" class="form-control inputwidth" id="iterinary_title" name="iterinary_title[]" placeholder="iterinary title" value="<?php echo $t->iterinary_title;?>">
 
 					</div>
 					<div class="mb-3">
-					  <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-					  <textarea class="form-control" id="exampleFormControlTextarea1" name="iterinary_details[]" rows="3"><?php echo $t->iterinary_details;?></textarea>
+					  <label for="textarea_<?php echo $t->iterinary_id;?>" class="form-label">Description</label>
+					  <textarea class="form-control" id="textarea_<?php echo $t->iterinary_id;?>" name="iterinary_details[]" rows="3"><?php echo $t->iterinary_details;?></textarea>
 					</div>
 					</div>
 
@@ -58,46 +63,59 @@
 		
 		
 	<script> 
+		function deletea(a){
+		console.log(a);
+				Swal.fire({
+				  title: 'Are you sure?',
+				  text: "You won't be able to revert this!",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+				  	$.ajax({
+				      
+				      type: "GET",
+				      url: '<?php echo base_url()."/deletebikeitinerary/";?>'+a,
+				      cache: false,
+				      contentType: false,
+				      processData: false,
+				      success: function(result1) {
+				      	console.log(result1);
+				      	location.reload();
+				      	 
+				      }
+				    });
+				    
+				  }
+				})
+			}
 		function addday(){
 			 day = parseInt($('#day').html())+1;
-			var str = '<div class="form-group "><div class="btn btn-sm btn-danger">day '+day+'</div></div><div class="form-group"><div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Title</label><input type="hidden" class="form-control" id="iterinary_id" name="iterinary_id[]" placeholder="" value=""><input type="text" class="form-control" id="iterinary_title" name="iterinary_title[]" placeholder="iterinary title" value=""></div><div class="mb-3"><label for="exampleFormControlTextarea1" class="form-label">Description</label><textarea class="form-control" id="exampleFormControlTextarea1" name="iterinary_details[]" rows="3"></textarea></div></div>';
+			var str = '<div class="form-group "><div class="btn btn-sm btn-danger">day '+day+'</div></div><div class="form-group"><div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Title</label><input type="hidden" class="form-control " id="iterinary_id" name="iterinary_id[]" placeholder="" value=""><input type="text" class="form-control inputwidth" id="iterinary_title" name="iterinary_title[]" placeholder="iterinary title" value=""></div><div class="mb-3"><label for="newtextarea'+day+'" class="form-label">Description</label><textarea class="form-control" id="newtextarea'+day+'" name="iterinary_details[]" rows="3"></textarea></div></div>';
 			$('#daysdiv').append(str);
 			$('#day').html(day);
+			$('#newtextarea'+day).summernote({
+			    height: 200,width: 1239,
+			    callbacks: {
+			        onImageUpload: function(files, editor, welEditable) {
+			        	console.log(this.id);
+			            sendFile(files[0], editor, welEditable,this.id);
+			        }
+			    }
+			});
 		}
-$(document).ready(function() {
-  
-  $('#tripOverview').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'tripOverview');
-        }
-    }
-});
-    $('#thingsCarry').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'thingsCarry');
-        }
-    }
-});
-    $('#terms').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'terms');
-        }
-    }
-});
-    $('#mapImage').summernote({
-    height: 200,
-    callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0], editor, welEditable,'mapImage');
-        }
-    }
-});
+	$('textarea').summernote({
+	    height: 200,width: 1239,
+	    callbacks: {
+	        onImageUpload: function(files, editor, welEditable) {
+	        	console.log(this.id);
+	            sendFile(files[0], editor, welEditable,this.id);
+	        }
+	    }
+	});
 
   function sendFile(file, editor, welEditable,summernotid) {
   	//alert('hi');
@@ -120,7 +138,6 @@ $(document).ready(function() {
       }
     });
   }
-});
-		</script>
-		</body>
+</script>
+</body>
 </html>

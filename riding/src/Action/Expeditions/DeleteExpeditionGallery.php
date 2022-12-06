@@ -18,7 +18,9 @@ final class DeleteExpeditionGallery
       ResponseInterface $response, $args
   ): ResponseInterface 
   {
-    $expeditions = $this->expeditions->deleteExpeditionGallery($args);
+    $data = $request->getBody();
+    $data =(array) json_decode($data);
+    $expeditions = $this->expeditions->deleteExpeditionGallery($data);
     $response->getBody()->write((string)json_encode($expeditions));
     return $response
           ->withHeader('Content-Type', 'application/json');

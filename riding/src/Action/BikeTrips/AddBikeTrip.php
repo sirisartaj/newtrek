@@ -18,9 +18,9 @@ final class AddBikeTrip
       ResponseInterface $response
   ): ResponseInterface 
   {
-     // $data = $request->getParsedBody();
-    // $data =(array) json_decode($data);
-    $data = array_merge($_POST, $_FILES);
+      $data = $request->getBody();
+     $data =(array) json_decode($data);
+    //$data = array_merge($_POST, $_FILES);
     $bikeTrips = $this->bikeTrips->addBikeTrip($data);
     $response->getBody()->write((string)json_encode($bikeTrips));
     return $response

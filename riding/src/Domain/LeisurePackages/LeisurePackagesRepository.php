@@ -120,14 +120,20 @@ class LeisurePackagesRepository
   }
   public function updateLeisurePackage($data) {
     try {
+      
       extract($data);
     $pkg_overview1 = addslashes($pkg_overview);
     $terms_conditions1 = addslashes($terms_conditions);
-     $query = "UPDATE sg_leisurepackages SET pkg_name='".$pkg_name."',pkg_overview = '".$pkg_overview1."', inclusion_exclusion = '".$inclusion_exclusion."',    where_report ='".$where_report."', terms_conditions = '".$terms_conditions1."', modified_date = '".$modified_date."', modified_by='".$modified_by."' where leisure_id = '".$leisure_id."'";
+     $query = "UPDATE sg_leisurepackages SET pkg_name=:pkg_name,pkg_overview = :pkg_overview, inclusion_exclusion = :inclusion_exclusion, where_report =:where_report, terms_conditions =:terms_conditions, modified_date = '".$modified_date."', modified_by='".$modified_by."' where leisure_id = '".$leisure_id."'";
   
       $stmt = $this->connection->prepare($query);
       
       //$stmt->bindParam(':leisure_id',$leisureId);
+      $stmt->bindParam(':pkg_name',$pkg_name, PDO::PARAM_STR);
+      $stmt->bindParam(':pkg_overview',$pkg_overview, PDO::PARAM_STR);
+      $stmt->bindParam(':inclusion_exclusion',$inclusion_exclusion, PDO::PARAM_STR);
+      $stmt->bindParam(':where_report',$where_report, PDO::PARAM_STR);
+      $stmt->bindParam(':terms_conditions',$terms_conditions, PDO::PARAM_STR);
       if($stmt->execute()){
         
         
@@ -196,7 +202,7 @@ class LeisurePackagesRepository
         }
       } 
       else {
-        $query3 = "INSERT INTO sg_leisurepkgitinerary SET title = :title,description=:description,leisurepkg_id = :leisure_id,created_date = :created_date,created_by=:created_by,recordstatus='0'";
+        $query3 = "INSERT INTO sg_leisurepkgitinerary SET title = :title,description=:description,leisurepkg_id = :leisure_id,created_date = :created_date,created_by=:created_by,status='0'";
         $stmt3 = $this->connection->prepare($query3);
         $stmt3->bindParam(':title',$title);
         $stmt3->bindParam(':description', $description);
@@ -561,6 +567,36 @@ class LeisurePackagesRepository
       return $status;
     }
   }
+
+  public function DeleteGallery($data) {
+    try {
+      extract($data);
+      $query = "UPDATE sg_lp_gallery SET recordstatus='9',modified_date=:modified_date,modified_by=:modified_by where image_id=:image_id";
+      $stmt = $this->connection->prepare($query);
+      $stmt->bindParam(':image_id',$image_id);
+      $stmt->bindParam(':modified_date',$modified_date,PDO::PARAM_STR);
+      $stmt->bindParam(':modified_by',$modified_by,PDO::PARAM_STR);
+      $res=$stmt->execute();
+      if($res=='true'){ 
+        unlink(UPLOADPATH.'/expeditions/'.$image_name);
+        $status = array(
+          'status' => "200",
+          'message' => "Image Deleted Successfully");
+       } else {
+        $status = array(
+          'status' => "304",
+          'message' => "Error!!Image Not Deleted");
+      }
+      return $status;
+    } catch(PDOException $e) {
+      $status = array(
+              'status' => "500",
+              'message' => $e->getMessage()
+          );
+      return $status;
+    }
+  }
+
   public function addGallery($data) {
     try {
       // var_dump($data);die();

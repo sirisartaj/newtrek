@@ -14,72 +14,55 @@
      
 	</head>
 	<body>
-		<div class="container" style="margin-top:50px;">
+		<div class="container" style="margin:0px;">
 		<form action="<?php echo base_url().'/storeleisure'?>" method="post" name="adminform" id="adminform" enctype="multipart/form-data">
-			<?php //echo "<pre>";
-					//print_r($result);
-			?>
-		<table>
-			<tr>
-				<td>leisure</td>
-				<td>:</td>
-				<td>
-					<input type="text" name="pkg_name" value="<?= set_value('pkg_name');?>"/> 
-					
-				</td>
-			</tr>
-			<!-- <tr>
-				<td>leisure Fee</td>
-				<td>:</td>
-				<td>
-					<input type="text" name="leisure_fee" value="<?= set_value('leisure_fee');?>"/> 
-					
-				</td>
-			</tr> -->
-			<tr>
-				<td>leisure Days</td>
-				<td>:</td>
-				<td>
-					<input type="text" name="pkg_days" value="<?= set_value('pkg_days');?>"/> 
-					
-				</td>
-			</tr>
+			
+    <div class="form-group">
+        <div class="mb-3">
+          <label for="" class="form-label">Trip Title</label>
+          <input type="text" class="form-control" name="pkg_name" value="<?= set_value('pkg_name');?>"placeholder="Title" style="width: 1239px;"/> 
+             
 
-			<tr>
-				<td>Overview</td>
-				<td>:</td>
-				<td><textarea name="pkg_overview" id="pkg_overview" class="summernote"></textarea></td>
-			</tr>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Days</label>
+          <input type="text" class="form-control" name="pkg_days" value="<?= set_value('pkg_days');?>"placeholder="Title" style="width: 1239px;"/> 
+             
 
-			<tr>
-				<td>Things to carry</td>
-				<td>:</td>
-				<td><textarea name="inclusion_exclusion" id="inclusion_exclusion" class="summernote"></textarea></td>
-			</tr>
-			<tr>
-				<td>Terms&Conditions</td>
-				<td>:</td>
-				<td><textarea name="terms_conditions" id="terms" class="summernote"></textarea></td>
-			</tr>
-			<tr>
-				<td>How to reach</td>
-				<td>:</td>
-				<td><textarea name="where_report" id="where_report" class="summernote"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="3" align="center">
-					<input type="submit" name="submit" value="Save">
-					<input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
-				</td>
-			</tr>
-		</table>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Overview</label>
+          <textarea name="pkg_overview" id="pkg_overview" class="summernote"><?php echo $result->pkg_overview; ?></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="" class="form-label">Inclusion Exclusion</label>
+          <textarea name="inclusion_exclusion" id="inclusion_exclusion" class="summernote"><?php echo $result->inclusion_exclusion; ?></textarea>
+          
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Terms & Conditions</label>
+          <textarea name="terms_conditions" id="terms" class="summernote"><?php echo $result->terms_conditions; ?></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">How to reach</label>
+          <textarea name="where_report" id="where_report" class="summernote"><?php echo $result->where_report; ?></textarea>
+        </div>
+
+        <div class="mb-3">
+            <input type="submit" name="submit" value="Save">
+            <input type="button" name="cancel" value="Cancel" onclick="javascript:history.go(-1);">
+        </div>
+    </div>
+		
 		</form>
 		</div>
 	<script> 
 
   
   $('#pkg_overview').summernote({
-    height: 200,
+    height: 200,width: 1239,
+
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'pkg_overview');
@@ -87,7 +70,7 @@
     }
 });
     $('#inclusion_exclusion').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'inclusion_exclusion');
@@ -95,7 +78,7 @@
     }
 });
     $('#terms').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'terms');
@@ -103,7 +86,7 @@
     }
 });
     $('#where_report').summernote({
-    height: 200,
+    height: 200,width: 1239,
     callbacks: {
         onImageUpload: function(files, editor, welEditable) {
             sendFile(files[0], editor, welEditable,'where_report');

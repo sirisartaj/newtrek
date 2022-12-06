@@ -94,6 +94,10 @@ final class LeisurePackages
     $LeisurePackages = $this->repository->addGallery($data);
     return $LeisurePackages; 
   }
+  public function DeleteGallery($data) {
+    $LeisurePackages = $this->repository->DeleteGallery($data);
+    return $LeisurePackages; 
+  }
   public function getItineraryLeisure($data) {
     $LeisurePackagesItinerary = $this->repository->getItineraryLeisure($data);
     return $LeisurePackagesItinerary;

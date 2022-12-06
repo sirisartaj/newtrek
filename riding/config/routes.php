@@ -99,7 +99,7 @@ return function (App $app) {
   //Trek Gallery
   $app->get('/treks/trekgallery/{trek_id}',\App\Action\Treks\GetTrekGallery::class);
   $app->post('/treks/addtrekgallery',\App\Action\Treks\AddTrekGallery::class);
-  $app->delete('/treks/galleryimagedelete/{image_id}',\App\Action\Treks\DeleteTrekGallery::class);
+  $app->post('/treks/deleteTrekGallery',\App\Action\Treks\DeleteTrekGallery::class);
   $app->post('/treks/updatetrekimagestatus', \App\Action\Treks\UpdateTrekImageStatus::class);
 
   //Trek Reviews
@@ -170,7 +170,7 @@ return function (App $app) {
   //Bike Trip Gallery
   $app->get('/biketrips/getgallery/{trip_id}',\App\Action\BikeTrips\GetGallery::class);
   $app->post('/biketrips/addgallery',\App\Action\BikeTrips\AddGallery::class);
-  $app->delete('/biketrips/deletegallery/{image_id}',\App\Action\BikeTrips\DeleteGallery::class);
+  $app->post('/biketrips/deletegallery',\App\Action\BikeTrips\DeleteGallery::class);
   $app->post('/biketrips/updatetripimagestatus',\App\Action\BikeTrips\UpdateTripImageStatus::class);
 
   //Bike Trip Batches
@@ -395,7 +395,7 @@ Upcoming Follow Ups
   //Expeditions Gallery
   $app->get('/expeditions/expeditiongallery/{expedition_id}',\App\Action\Expeditions\GetExpeditionGallery::class);
   $app->post('/expeditions/addexpeditiongallery',\App\Action\Expeditions\AddExpeditionGallery::class);
-  $app->delete('/expeditions/galleryimagedelete/{image_id}',\App\Action\Expeditions\DeleteExpeditionGallery::class);
+  $app->post('/expeditions/galleryimagedelete',\App\Action\Expeditions\DeleteExpeditionGallery::class);
   $app->post('/expeditions/updateexpeditionimagestatus',\App\Action\Expeditions\UpdateExpeditionImageStatus::class);
 
   //Expeditions Reviews
@@ -447,7 +447,7 @@ Upcoming Follow Ups
   /* LeisurePackages Gallery*/
   $app->get('/leisurepackages/getgallery/{leisure_id}',\App\Action\LeisurePackages\GetGallery::class);
   $app->post('/leisurepackages/addgallery',\App\Action\LeisurePackages\AddGallery::class);
-  $app->delete('/leisurepackages/deletegallery/{image_id}',\App\Action\LeisurePackages\DeleteGallery::class);
+  $app->post('/leisurepackages/deletegallery',\App\Action\LeisurePackages\DeleteGallery::class);
   $app->post('/leisurepackages/updatetripimagestatus',\App\Action\LeisurePackages\UpdateTripImageStatus::class);
 
   // Promotions
@@ -631,7 +631,7 @@ Upcoming Follow Ups
   /* LeisurePackages Gallery*/
   $app->get('/hostels/getgallery/{hostel_id}',\App\Action\Hostels\GetGallery::class);
   $app->post('/hostels/addgallery',\App\Action\Hostels\AddGallery::class);
-  $app->delete('/hostels/deletegallery/{image_id}',\App\Action\Hostels\DeleteGallery::class);
+  $app->post('/hostels/deletegallery',\App\Action\Hostels\DeleteGallery::class);
   $app->post('/hostels/updatetripimagestatus',\App\Action\Hostels\UpdateTripImageStatus::class);
 
   // Calebrity Trips

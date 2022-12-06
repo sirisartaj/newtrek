@@ -8,6 +8,20 @@
 		<script type="text/javascript" src="<?php echo baseURL1;?>/js/jquery-ui-1.11.2.min.js"></script>
 	</head>
 	<body>
+		<style type="text/css">
+			.delete{
+					    width: 757px;
+					    text-align: center;
+					    position: relative;
+					    top: 27px;
+					    background: #bd1d1d;
+					    padding: 5px;
+					    border-radius: 7px;
+					    color: #fff;
+					    opacity: 0.4;
+			}
+			
+		</style>
 		<div class="container">
 			<div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
@@ -30,14 +44,29 @@
                 <ul class="gallery" id="gallery">
 	                <?php foreach ($galleryImages->gallery_image as $images) { ?>
 	                  <li class="sortable" id="photoid_<?php echo $images->image_id;?>">
+	                  	 <?php $onlyname = end(explode('/', $images->imageName));?>
+
+	                  	 <!-- <div class="d-flex justify-content-between">
+								       <div>
+								            
+								        </div>
+								        <div>
+								            <div id="<?php echo $images->image_id;?>" title="Delete<?php echo $images->imageName;?>" url=""  class="delete btn btn-danger col-1" onclick="deletegallery('<?php echo $images->image_id;?>','<?php echo $onlyname;?>');"><i class="icon-trash"></i>X
+									                      </div>
+								        </div>
+								    </div> -->
+
+
+
+	                    <div class=" " style=""  >
+	                      <div id="<?php echo $images->image_id;?>" title="Delete<?php echo $images->imageName;?>" url=""  class="delete btn btn-danger col-1" onclick="deletegallery('<?php echo $images->image_id;?>','<?php echo $onlyname;?>');"><i class="icon-trash"></i>X
+	                      </div>
+	                    </div>
+
 	                    <a href="#" class="animal effect-zoe magnific" data-mfp-src="<?php echo $images->imageName;?>">
 	                    <img width="766" src="<?php echo $images->imageName;?>" alt="no image" />
 	                    </a>
-	                    <?php $onlyname = end(explode('/', $images->imageName));?>
-	                    <div class="gallery-tools"  >
-	                      <div id="<?php echo $images->image_id;?>" title="Delete<?php echo $images->imageName;?>" url=""  class="delete btn btn-danger" onclick="deletegallery('<?php echo $images->image_id;?>','<?php echo $onlyname;?>');"><i class="icon-trash"></i>X
-	                      </div>
-	                    </div>
+	                   
 	                    
 	                  </li>
 	                  <?php } ?>   

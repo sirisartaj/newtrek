@@ -10,11 +10,16 @@
 	<body>
 		<style type="text/css">
 			.delete{
-
-		    width: 42px;
-		    position: relative;
-		    bottom: 25px;
+					width: 12px;
+			    position: relative;
+			    top: 0;
+			    display: block;
+			    background: #bd1d1d;
+			    padding: 5px;
+			    border-radius: 7px;
+			    color: #fff;
 			}
+			
 		</style>
 		<div class="container">
 			<div class="row">
@@ -54,6 +59,7 @@
           </div>
         </div>
 		</div>
+		<script type="text/javascript" src="<?php echo baseURL1;?>/js/dropzone.min.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>	
 		<script> 
 			
@@ -61,10 +67,10 @@
       "maxFilesize": 20
     });
 				Dropzone.autoDiscover = false;
-			  $(".dropzone").hide();
-			  //$("#upload-dropzone").click(function(){
+			  //$(".dropzone").hide();
+			  
 			    $(".dropzone").slideToggle('slow');
-			  //});
+			  
 			function deletegallery(id,name){
 		console.log(id);
 				Swal.fire({
@@ -103,7 +109,7 @@
 			});
 		    $('#')
 		</script>
-		<script type="text/javascript" src="<?php echo baseURL1;?>/js/dropzone.min.js"></script>
+		
 
 	</body>
 </html>

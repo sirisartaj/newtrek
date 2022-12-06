@@ -93,12 +93,12 @@ define('EVENT_PRIORITY_NORMAL', 100);
  */
 define('EVENT_PRIORITY_HIGH', 10);
 
-define('baseURL1','http://localhost/treking1');
-define('SITEURL','http://localhost/treking1/uploads/');
-define('baseimgURL',$_SERVER["DOCUMENT_ROOT"].'/treking1/uploads/');
-define('base_url_SLim','http://localhost/treking1/riding');
+define('baseURL1','http://localhost/newtrek');
+define('SITEURL','http://localhost/newtrek/uploads/');
+define('baseimgURL',$_SERVER["DOCUMENT_ROOT"].'/newtrek/uploads/');
+define('base_url_SLim','http://localhost/newtrek/riding');
 define('RESTAPYKEY',urldecode('78e7fc94-0169-4b9a-994d-5e402cfbb01'));
 
-define('IMGUPLOAD',$_SERVER['DOCUMENT_ROOT'].'/treking1/riding/public/uploads/');
-define('SITEURL1','http://139.59.90.200/treking1/riding/public/uploads/');
-define('baseimgURL1',$_SERVER["DOCUMENT_ROOT"].'/treking1/riding/public/uploads/');
+define('IMGUPLOAD',$_SERVER['DOCUMENT_ROOT'].'/newtrek/riding/public/uploads/');
+define('SITEURL1','http://139.59.90.200/newtrek/riding/public/uploads/');
+define('baseimgURL1',$_SERVER["DOCUMENT_ROOT"].'/newtrek/riding/public/uploads/');

@@ -24,8 +24,8 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost/treking1/public';
-   // public $base_url_SLim = 'http://localhost/treking1/riding';
+    public $baseURL = 'http://localhost/newtrek/public';
+   // public $base_url_SLim = 'http://localhost/newtrek/riding';
     
 
     /**

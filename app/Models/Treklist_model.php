@@ -75,8 +75,8 @@
 		}
 		public function deletetrekgallery($data){
 			$home = new Home();
-			echo $url = base_url_SLim.'/treks/deleteTrekGallery';
-			print_r(json_encode($data));exit;
+			$url = base_url_SLim.'/treks/deleteTrekGallery';
+			
 			return $home->CallAPI('POST',$url,$data);
 		}
 

@@ -8,6 +8,19 @@
 		<script type="text/javascript" src="<?php echo baseURL1;?>/js/jquery-ui-1.11.2.min.js"></script>
 	</head>
 	<body>
+		<style type="text/css">
+			.delete{
+					width: 12px;
+			    position: relative;
+			    top: 0;
+			    display: block;
+			    background: #bd1d1d;
+			    padding: 5px;
+			    border-radius: 7px;
+			    color: #fff;
+			}
+			
+		</style>
 		<div class="container">
 			<div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">

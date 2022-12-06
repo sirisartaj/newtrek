@@ -9,7 +9,32 @@
 	</head>
 	<body>
 		<style type="text/css">
-			.delete{
+
+.gallery-tools {
+  width: 766px;
+  /*border-radius: 25px;*/
+  border: 2px solid #ccc;
+  padding: 15px 15px 15px 15px;
+  margin: 20px 20px 20px 20px;
+  background: #A4D3EE;
+  overflow: visible;
+  box-shadow: 5px 5px 2px #888888;
+  position: relative;
+}
+
+.delete {
+    position: absolute;
+    background: red;
+    color: white;
+    top: -10px;
+    right: -10px;
+    padding: 5px;
+    border-radius: 7px;
+}
+.gallery{
+	list-style: none;
+}
+			/*.delete{
 					    width: 757px;
 					    text-align: center;
 					    position: relative;
@@ -19,7 +44,7 @@
 					    border-radius: 7px;
 					    color: #fff;
 					    opacity: 0.4;
-			}
+			}*/
 			
 		</style>
 		<div class="container">
@@ -56,17 +81,16 @@
 								        </div>
 								    </div> -->
 
+								    <div class="gallery-tools">
 
-
-	                    <div class=" " style=""  >
 	                      <div id="<?php echo $images->image_id;?>" title="Delete<?php echo $images->imageName;?>" url=""  class="delete btn btn-danger col-1" onclick="deletegallery('<?php echo $images->image_id;?>','<?php echo $onlyname;?>');"><i class="icon-trash"></i>X
 	                      </div>
-	                    </div>
+	                    
 
 	                    <a href="#" class="animal effect-zoe magnific" data-mfp-src="<?php echo $images->imageName;?>">
 	                    <img width="766" src="<?php echo $images->imageName;?>" alt="no image" />
 	                    </a>
-	                   
+	                   </div>
 	                    
 	                  </li>
 	                  <?php } ?>   

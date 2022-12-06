@@ -18,8 +18,8 @@
 			<div class="form-group">
         <div class="mb-3">
           <label for="" class="form-label">Trip Title</label>
-          <input type="text" class="form-control inputwidth" name="pkg_name" value="<?php echo $result->pkgName; ?>"placeholder="Title" style="width: 1239px;"/> 
-          <input type="hidden" class="form-control" name="leisure_id" value="<?php echo $leisure_id; ?>"placeholder="Title" style="width: 1239px;"/> 
+          <input type="text" class="form-control inputwidth" name="pkg_name" value="<?php echo $result->pkgName; ?>"placeholder="Title" style="width: 1239px;" id="pkg_name"/> 
+          <input type="hidden" class="form-control" name="leisure_id" value="<?php echo $leisure_id; ?>"/> 
              
           <span class="text-danger" id="pkg_name-error">
               <?php  if ($validation->hasError('pkg_name')) {
@@ -136,7 +136,7 @@
         $('#pkg_name-error').html('Please Enter Package Name');
         error=1;
       }else{
-        $('#trek_title-error').html('');
+        $('#pkg_name-error').html('');
       }
 
       if(mapImage==''){
